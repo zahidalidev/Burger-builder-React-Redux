@@ -1,0 +1,35 @@
+.header{
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #703b09;
+    justify-content: space-between;
+    align-items: center;
+    box-sizing: border-box;
+}
+.navbar{
+    box-shadow: none !important;
+    margin: 5px;
+}
+
+.logo
+{ 
+    background-color: white;
+    height: 3rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.btn-login{
+}
+.nav-ul{
+}
+
+.fa-bars{
+    color: #fff !important;
+    font-weight: bold;
+    font-size: 2.25rem !important;
+    cursor: pointer;
+    /* background-color: white !important;  */
+}

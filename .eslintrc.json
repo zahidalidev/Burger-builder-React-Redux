@@ -33,7 +33,7 @@
       }
     ],
     "jsx-quotes": [2, "prefer-single"],
-    "max-lines": ["error", { "max": 200, "skipBlankLines": true }],
+    "max-lines": ["error", { "max": 2000, "skipBlankLines": true }],
     "no-alert": "error",
     "no-console": "warn",
     "no-debugger": "warn",

@@ -1,12 +1,12 @@
 import React from 'react'
 
 // Custom components
-import NavBar from '../components/navbar/NavBar'
+import Navbar from '../components/appbar/MyAppbar'
 
 function Home() {
   return (
     <div style={{ backgroundColor: '#FFFFFF' }}>
-      <NavBar />
+      <Navbar />
     </div>
   )
 }

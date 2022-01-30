@@ -1,12 +1,7 @@
-import react from "react";
+import Home from './app/pages/Home'
 
-// pages
-import Home from "./app/pages/Home";
-
-function App(props){
-
-  return (
-    <Home />
-  )
+function App() {
+  return <Home />
 }
-export default App;
+
+export default App

@@ -1,8 +1,8 @@
 // Custom components
 // import Home from './app/pages/home/Home'
 import MyAppbar from './app/components/appbar/MyAppbar'
-import Modal from './app/components/modal/Modal'
-import Login from './app/pages/auth/login/Login'
+// import Login from './app/pages/auth/login/Login'
+import Checkout from './app/pages/checkout/Checkout'
 
 function App() {
   return (
@@ -11,8 +11,8 @@ function App() {
 
       <main className='main-body'>
         {/* <Home /> */}
-        <Login />
-        <Modal />
+        {/* <Login /> */}
+        <Checkout />
       </main>
     </div>
   )

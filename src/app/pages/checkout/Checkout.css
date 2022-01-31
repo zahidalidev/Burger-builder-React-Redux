@@ -1,0 +1,27 @@
+.CheckoutSummary {
+    text-align: center;
+    width: 100%;
+    margin: auto;
+}
+
+.main-btn{
+    margin-top: 10rem !important;
+}
+
+.Button {
+    background-color: transparent;
+    border: none;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    margin: 10px;
+    font-weight: bold;
+}
+
+.Success {
+    color: #5C9210;
+}
+
+.Danger {
+    color: #944317;
+}

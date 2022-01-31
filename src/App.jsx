@@ -1,8 +1,9 @@
 // Custom components
 // import Home from './app/pages/home/Home'
 import MyAppbar from './app/components/appbar/MyAppbar'
+import Orders from './app/pages/orders/Orders'
 // import Login from './app/pages/auth/login/Login'
-import Checkout from './app/pages/checkout/Checkout'
+// import Checkout from './app/pages/checkout/Checkout'
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
       <main className='main-body'>
         {/* <Home /> */}
         {/* <Login /> */}
-        <Checkout />
+        {/* <Checkout /> */}
+        <Orders />
       </main>
     </div>
   )

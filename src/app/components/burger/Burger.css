@@ -90,8 +90,6 @@
     box-shadow: inset 1px 3px #c9c9c9;
   }
   
-
-
   /* burger content */
 .Meat {
     width: 80%;
@@ -122,4 +120,11 @@
     height: 3%;
     background: linear-gradient(#bf3813, #c45e38);
     margin: 2% auto;
+}
+
+@media (max-width: 500px){
+    .Burger {
+        width: 24rem !important;
+        height: 24rem !important;
+    }
 }

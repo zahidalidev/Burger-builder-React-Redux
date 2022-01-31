@@ -3,45 +3,31 @@ import PropTypes from 'prop-types'
 
 import './Footer.css'
 
-function Footer({ ingredients }) {
-  console.log(ingredients)
+function Footer({ ingredients, handleIngredients }) {
   return (
     <div className='BuildControls'>
       <p>
         Current price: <strong>$3.00</strong>
       </p>
 
-      {ingredients.map(item => (
-        <div key={item.id} className='BuildControl'>
+      {ingredients.map((item, i) => (
+        <div key={item.id.toString()} className='BuildControl'>
           <div className='BuildControl Label'>{item.name}</div>
-          <button className='BuildControl buil-btn-disabled less less-active' disabled=''>
+          <button
+            onClick={() => handleIngredients(i, 'remove')}
+            className={`BuildControl ${item.lessDisable && 'buil-btn-disabled'} less less-active`}
+            disabled={item.lessDisable}
+          >
             Less
           </button>
-          <button className='BuildControl more more-active'>More</button>
+          <button
+            onClick={() => handleIngredients(i, 'add')}
+            className='BuildControl more more-active'
+          >
+            More
+          </button>
         </div>
       ))}
-
-      <div className='BuildControl'>
-        <div className='BuildControl Label'>Bacon</div>
-        <button className='BuildControl buil-btn-disabled less less-active' disabled=''>
-          Less
-        </button>
-        <button className='BuildControl more more-active'>More</button>
-      </div>
-      <div className='BuildControl'>
-        <div className='BuildControl Label'>Cheese</div>
-        <button className='BuildControl buil-btn-disabled less less-active' disabled=''>
-          Less
-        </button>
-        <button className='BuildControl more more-active'>More</button>
-      </div>
-      <div className='BuildControl'>
-        <div className='BuildControl Label'>Meat</div>
-        <button className='BuildControl buil-btn-disabled less less-active' disabled=''>
-          Less
-        </button>
-        <button className='BuildControl more more-active'>More</button>
-      </div>
       <button
         className='BuildControls OrderButton OrderButton-active OrderButton-disabled'
         disabled={true}
@@ -53,7 +39,8 @@ function Footer({ ingredients }) {
 }
 
 Footer.propTypes = {
-  ingredients: PropTypes.string.isRequired
+  ingredients: PropTypes.array.isRequired,
+  handleIngredients: PropTypes.func.isRequired
 }
 
 export default Footer

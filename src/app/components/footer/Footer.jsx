@@ -1,20 +1,26 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 
 import './Footer.css'
 
-function Footer() {
+function Footer({ ingredients }) {
+  console.log(ingredients)
   return (
     <div className='BuildControls'>
       <p>
         Current price: <strong>$3.00</strong>
       </p>
-      <div className='BuildControl'>
-        <div className='BuildControl Label'>Lettuce</div>
-        <button className='BuildControl buil-btn-disabled less less-active' disabled=''>
-          Less
-        </button>
-        <button className='BuildControl more more-active'>More</button>
-      </div>
+
+      {ingredients.map(item => (
+        <div key={item.id} className='BuildControl'>
+          <div className='BuildControl Label'>{item.name}</div>
+          <button className='BuildControl buil-btn-disabled less less-active' disabled=''>
+            Less
+          </button>
+          <button className='BuildControl more more-active'>More</button>
+        </div>
+      ))}
+
       <div className='BuildControl'>
         <div className='BuildControl Label'>Bacon</div>
         <button className='BuildControl buil-btn-disabled less less-active' disabled=''>
@@ -44,6 +50,10 @@ function Footer() {
       </button>
     </div>
   )
+}
+
+Footer.propTypes = {
+  ingredients: PropTypes.string.isRequired
 }
 
 export default Footer

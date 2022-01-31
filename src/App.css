@@ -1,1 +1,21 @@
-body { margin: 0 !important }
+body { 
+    margin: 0 !important;
+    font-family: Open Sans,sans-serif !important;
+}
+.main-body{
+    margin-top: 7rem;
+}
+h3 {
+    display: block !important;
+    font-size: 1.17em !important;
+    margin-block-start: 1em !important;
+    margin-block-end: 1em !important;
+    margin-inline-start: 0px !important;
+    margin-inline-end: 0px !important;
+    font-weight: bold !important;
+}
+
+
+strong {
+    font-weight: bold !important;
+}

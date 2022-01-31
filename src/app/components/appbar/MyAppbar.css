@@ -10,7 +10,7 @@
 }
 .navbar{
     box-shadow: none !important;
-    margin: 5px;
+    /* margin: 5px; */
 }
 
 .logo
@@ -21,15 +21,42 @@
     border-radius: 5px;
     cursor: pointer;
 }
-.btn-login{
-}
-.nav-ul{
-}
 
 .fa-bars{
     color: #fff !important;
     font-weight: bold;
     font-size: 2.25rem !important;
     cursor: pointer;
-    /* background-color: white !important;  */
+}
+
+.nav-list{
+    margin: 0;
+    padding: 0;
+    display: -ms-flexbox;
+    -ms-flex-flow: column;
+    flex-flow: column;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 100%;
+}
+
+.nav-item{
+    height: 3.7rem;
+}
+
+.nav-item:hover{
+    background-color: #8F5C2C ;
+    border-bottom: 4px solid #40a4c8;
+    color: #fff;
+}
+
+.active-menue{
+    background-color: #8F5C2C ;
+    border-bottom: 4px solid #40a4c8;
+    color: #fff;
+}
+
+.nav-link{
+    font-size: 1rem;
+    font-weight: 400;
 }

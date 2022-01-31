@@ -87,14 +87,14 @@ function MyAppbar() {
 
         {/* collabseable */}
         <div className='collapse navbar-collapse justify-content-between px-3' id='navbarCollapse'>
-          <ul className='navbar-nav ml-auto py-0'>
-            <li>
-              <a onClick={() => {}} className='nav-item nav-link '>
+          <ul className='navbar-nav nav-list ml-auto py-0'>
+            <li className='nav-item d-flex align-items-center active-menue'>
+              <a onClick={() => {}} className='nav-link'>
                 Burger Builder
               </a>
             </li>
-            <li>
-              <a onClick={() => {}} className='nav-item nav-link '>
+            <li className='nav-item d-flex align-items-center'>
+              <a onClick={() => {}} className='nav-link'>
                 Login
               </a>
             </li>

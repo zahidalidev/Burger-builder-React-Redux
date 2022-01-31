@@ -4,6 +4,7 @@ import './Checkout.css'
 
 // custom components
 import Burger from '../../components/burger/Burger'
+import ContactForm from '../../components/contactform/ContactForm'
 
 function Checkout() {
   return (
@@ -14,6 +15,8 @@ function Checkout() {
       </div>
       <button className='Button main-btn Danger'>Cancel</button>
       <button className='Button Success'>Continue</button>
+
+      <ContactForm />
     </div>
   )
 }

@@ -38,7 +38,7 @@
     "no-console": "warn",
     "no-debugger": "warn",
     "no-duplicate-imports": "off",
-    "no-magic-numbers": ["error", { "ignore": [-1, 0, 1, 2, 100] }],
+    "no-magic-numbers": ["error", { "ignore": [-1, 0, 1, 2, 3, 100] }],
     "no-undef": "off",
     "prefer-arrow-callback": 0,
     "prefer-const": 0,

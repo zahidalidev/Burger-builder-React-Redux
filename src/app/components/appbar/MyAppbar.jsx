@@ -95,12 +95,6 @@ function MyAppbar() {
               </a>
             </li>
             {currentUser ? (
-              <li className='nav-item d-flex align-items-center'>
-                <a onClick={() => navigate('/login')} className='nav-link'>
-                  Login
-                </a>
-              </li>
-            ) : (
               <>
                 <li className='nav-item d-flex align-items-center'>
                   <a onClick={() => navigate('/login')} className='nav-link'>
@@ -113,6 +107,12 @@ function MyAppbar() {
                   </a>
                 </li>
               </>
+            ) : (
+              <li className='nav-item d-flex align-items-center'>
+                <a onClick={() => navigate('/login')} className='nav-link'>
+                  Login
+                </a>
+              </li>
             )}
           </ul>
         </div>

@@ -1,4 +1,5 @@
 import React, { useState, useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import UserContext from '../../../context/userContext'
 
@@ -25,6 +26,7 @@ function Login() {
   const [submitType, setSubmitType] = useState('SIGNIN')
 
   const userCont = useContext(UserContext)
+  const navigate = useNavigate()
 
   const handleChange = (i, value) => {
     const tempData = [...formData]
@@ -44,9 +46,18 @@ function Login() {
       password: formData[1].value
     }
 
-    const { setCurrentUser } = userCont
-    localStorage.setItem('user', JSON.stringify(user))
-    setCurrentUser(user)
+    const valid = formData[0].value.length > 0 && formData[1].value.length > 6
+
+    if (valid) {
+      const { setCurrentUser } = userCont
+      localStorage.setItem('user', JSON.stringify(user))
+      setCurrentUser(user)
+
+      navigate('/')
+    }
+
+    handleChange(0, formData[0].value)
+    handleChange(1, formData[1].value)
   }
 
   return (

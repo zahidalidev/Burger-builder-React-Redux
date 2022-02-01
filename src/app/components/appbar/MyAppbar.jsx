@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useHistory } from 'react-router'
+import { useNavigate } from 'react-router-dom'
 import clsx from 'clsx'
 import Drawer from '@material-ui/core/Drawer'
 import List from '@material-ui/core/List'
@@ -18,7 +18,7 @@ const useStyles = makeStyles({
 })
 
 function MyAppbar() {
-  const history = useHistory()
+  const navigate = useNavigate()
 
   const classes = useStyles()
 
@@ -83,7 +83,7 @@ function MyAppbar() {
           <a onClick={toggleDrawer(true)} className='fa fa-bars'></a>
         </button>
 
-        <img className='logo' onClick={() => history.push('/home')} src={logo} />
+        <img className='logo' onClick={() => navigate('/home')} src={logo} />
 
         {/* collabseable */}
         <div className='collapse navbar-collapse justify-content-between px-3' id='navbarCollapse'>

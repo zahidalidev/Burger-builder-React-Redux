@@ -1,13 +1,17 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
+
+import UserContext from '../../context/userContext'
 
 import './Footer.css'
 
-function Footer({ ingredients, handleIngredients }) {
+function Footer({ ingredients, handleIngredients, handleOrder, currentTotalPrice }) {
+  const { currentUser } = useContext(UserContext)
+
   return (
     <div className='BuildControls'>
       <p>
-        Current price: <strong>$3.00</strong>
+        Current price: <strong>{`$${currentTotalPrice.toFixed(2)}`}</strong>
       </p>
 
       {ingredients.map((item, i) => (
@@ -28,11 +32,15 @@ function Footer({ ingredients, handleIngredients }) {
           </button>
         </div>
       ))}
+
       <button
-        className='BuildControls OrderButton OrderButton-active OrderButton-disabled'
-        disabled={true}
+        className={`BuildControls OrderButton text-uppercase ${
+          currentTotalPrice > 3 ? 'OrderButton-active' : 'OrderButton-disabled'
+        }`}
+        disabled={currentTotalPrice == 3}
+        onClick={handleOrder}
       >
-        SIGN UP TO ORDER
+        {currentUser ? 'Order now' : 'Sign up to order'}
       </button>
     </div>
   )
@@ -40,7 +48,9 @@ function Footer({ ingredients, handleIngredients }) {
 
 Footer.propTypes = {
   ingredients: PropTypes.array.isRequired,
-  handleIngredients: PropTypes.func.isRequired
+  handleIngredients: PropTypes.func.isRequired,
+  handleOrder: PropTypes.func.isRequired,
+  currentTotalPrice: PropTypes.number.isRequired
 }
 
 export default Footer

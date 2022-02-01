@@ -1,42 +1,33 @@
-import React, { useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import './Home.css'
 
 // Custom components
 import Burger from '../../components/burger/Burger'
 import Footer from '../../components/footer/Footer'
+import Modal from '../../components/modal/Modal'
+
+// Context
+import UserContext from '../../context/userContext'
+import IngredientContext from '../../context/ingredientContext'
 
 function Home() {
-  const [ingredients, setIngredients] = useState([
-    {
-      id: 1,
-      name: 'Lettuce',
-      lessDisable: true,
-      price: 0.5,
-      list: []
-    },
-    {
-      id: 2,
-      name: 'Bacon',
-      lessDisable: true,
-      price: 0.7,
-      list: []
-    },
-    {
-      id: 3,
-      name: 'Cheese',
-      lessDisable: true,
-      price: 0.4,
-      list: []
-    },
-    {
-      id: 4,
-      name: 'Meat',
-      lessDisable: true,
-      price: 1.3,
-      list: []
-    }
-  ])
+  const [modal, setModal] = useState(false)
+  const [currentTotalPrice, setCurrentTotalPrice] = useState(3)
+
+  const { ingredients, setIngredients } = useContext(IngredientContext)
+  const { currentUser } = useContext(UserContext)
+
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    let price = 3
+    ingredients.map(item => {
+      price += item.price * item.list.length
+    })
+    setCurrentTotalPrice(price)
+  }, [ingredients])
 
   const handleIngredients = (i, type) => {
     const tempIngredients = [...ingredients]
@@ -55,10 +46,32 @@ function Home() {
     setIngredients(tempIngredients)
   }
 
+  const handleOrder = () => {
+    if (!currentUser) {
+      navigate('/login')
+      return
+    }
+
+    setModal(true)
+  }
+
+  const handleModal = action => {
+    setModal(false)
+    if (action) {
+      navigate('/checkout')
+    }
+  }
+
   return (
     <>
       <Burger ingredients={ingredients} />
-      <Footer ingredients={ingredients} handleIngredients={handleIngredients} />
+      <Footer
+        handleOrder={handleOrder}
+        ingredients={ingredients}
+        handleIngredients={handleIngredients}
+        currentTotalPrice={currentTotalPrice}
+      />
+      {modal && <Modal handleModal={handleModal} currentTotalPrice={currentTotalPrice} />}
     </>
   )
 }

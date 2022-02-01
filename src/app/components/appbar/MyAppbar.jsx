@@ -84,20 +84,20 @@ function MyAppbar() {
           <a onClick={toggleDrawer(true)} className='fa fa-bars'></a>
         </button>
 
-        <img className='logo' onClick={() => navigate('/home')} src={logo} />
+        <img className='logo' onClick={() => navigate('/')} src={logo} />
 
         {/* collabseable */}
         <div className='collapse navbar-collapse justify-content-between px-3' id='navbarCollapse'>
           <ul className='navbar-nav nav-list ml-auto py-0'>
             <li className='nav-item d-flex align-items-center active-menue'>
-              <a onClick={() => {}} className='nav-link'>
+              <a onClick={() => navigate('/')} className='nav-link'>
                 Burger Builder
               </a>
             </li>
             {currentUser ? (
               <>
                 <li className='nav-item d-flex align-items-center'>
-                  <a onClick={() => navigate('/login')} className='nav-link'>
+                  <a onClick={() => navigate('/orders')} className='nav-link'>
                     Orders
                   </a>
                 </li>

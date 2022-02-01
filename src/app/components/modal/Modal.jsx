@@ -1,36 +1,44 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import PropTypes from 'prop-types'
+
+// context
+import IngredientContext from '../../context/ingredientContext'
 
 import './Modal.css'
 
-function Modal() {
+function Modal({ handleModal, currentTotalPrice }) {
+  const { ingredients } = useContext(IngredientContext)
+
   return (
     <>
       <div className='backdrop'></div>
       <div className='Modal' style={{ transform: 'translateY(0px)', opacity: 1 }}>
         <h3>Your Order Summary:</h3>
         <ul>
-          <li>
-            <span>Lettuce</span>: 1
-          </li>
-          <li>
-            <span>Bacon</span>: 0
-          </li>
-          <li>
-            <span>Cheese</span>: 0
-          </li>
-          <li>
-            <span>Meat</span>: 0
-          </li>
+          {ingredients.map(item => (
+            <li key={item.name}>
+              <span>{item.name}</span>: {item.list.length}
+            </li>
+          ))}
         </ul>
         <p>
-          <strong>Total Price: $3.50</strong>
+          <strong>Total Price: {`$${currentTotalPrice}`}</strong>
         </p>
         <p>Continue to Checkout?</p>
-        <button className='Button Danger'>CANCEL</button>
-        <button className='Button Success'>CONTINUE</button>
+        <button onClick={() => handleModal(false)} className='Button Danger'>
+          CANCEL
+        </button>
+        <button onClick={() => handleModal(true)} className='Button Success'>
+          CONTINUE
+        </button>
       </div>
     </>
   )
+}
+
+Modal.propTypes = {
+  handleModal: PropTypes.func.isRequired,
+  currentTotalPrice: PropTypes.number.isRequired
 }
 
 export default Modal

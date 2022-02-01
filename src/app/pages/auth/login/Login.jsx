@@ -22,6 +22,8 @@ function Login() {
     }
   ])
 
+  const [submitType, setSubmitType] = useState('SIGNIN')
+
   const userCont = useContext(UserContext)
 
   const handleChange = (i, value) => {
@@ -43,6 +45,7 @@ function Login() {
     }
 
     const { setCurrentUser } = userCont
+    localStorage.setItem('user', JSON.stringify(user))
     setCurrentUser(user)
   }
 
@@ -66,7 +69,16 @@ function Login() {
             SUBMIT
           </button>
         </form>
-        <button className='Button Danger'>SIGNIN</button>
+
+        {submitType === 'SIGNIN' ? (
+          <button onClick={() => setSubmitType('REGISTER')} className='Button Danger'>
+            SIGNIN
+          </button>
+        ) : (
+          <button onClick={() => setSubmitType('SIGNIN')} className='Button Danger'>
+            REGISTER
+          </button>
+        )}
       </div>
     </main>
   )

@@ -1,10 +1,11 @@
-import React, { useState } from 'react'
+import React, { useState, useContext } from 'react'
 import { useNavigate } from 'react-router-dom'
 import clsx from 'clsx'
 import Drawer from '@material-ui/core/Drawer'
 import List from '@material-ui/core/List'
 import { makeStyles } from '@material-ui/core/styles'
 
+import UserContext from '../../context/userContext'
 import logo from '../../assets/burger-logo.b8503d26.png'
 import './MyAppbar.css'
 
@@ -19,7 +20,7 @@ const useStyles = makeStyles({
 
 function MyAppbar() {
   const navigate = useNavigate()
-
+  const { currentUser } = useContext(UserContext)
   const classes = useStyles()
 
   const [state, setState] = useState({
@@ -93,11 +94,26 @@ function MyAppbar() {
                 Burger Builder
               </a>
             </li>
-            <li className='nav-item d-flex align-items-center'>
-              <a onClick={() => {}} className='nav-link'>
-                Login
-              </a>
-            </li>
+            {currentUser ? (
+              <li className='nav-item d-flex align-items-center'>
+                <a onClick={() => navigate('/login')} className='nav-link'>
+                  Login
+                </a>
+              </li>
+            ) : (
+              <>
+                <li className='nav-item d-flex align-items-center'>
+                  <a onClick={() => navigate('/login')} className='nav-link'>
+                    Orders
+                  </a>
+                </li>
+                <li className='nav-item d-flex align-items-center'>
+                  <a onClick={() => navigate('/login')} className='nav-link'>
+                    Logout
+                  </a>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </nav>

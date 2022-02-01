@@ -1,9 +1,14 @@
 import React, { useState } from 'react'
+import PropsTypes from 'prop-types'
 
+// custom components
 import './ContactForm.css'
 import '../../pages/auth/login/Login.css'
 
-function ContactForm() {
+function ContactForm({ handleOrder }) {
+  const [deliveryOption, setDeliveryOption] = useState('fastest')
+  const [disableOrderBtn, setDisableOrderBtn] = useState(true)
+
   const [formData, setFormData] = useState([
     {
       id: 0,
@@ -53,6 +58,28 @@ function ContactForm() {
       tempData[i].error = tempData[i].value.length < validLength
     }
     setFormData(tempData)
+    handleOrderButton()
+  }
+
+  const handleOrderButton = () => {
+    const tempFormData = [...formData]
+    let tempDisble
+    for (let i = 0; i < tempFormData.length; i++) {
+      if (i === 2) {
+        tempDisble = tempFormData[i].value.length != 5
+        if (tempDisble) {
+          setDisableOrderBtn(true)
+          return
+        }
+      } else {
+        tempDisble = tempFormData[i].value.length === 0
+        if (tempDisble) {
+          setDisableOrderBtn(true)
+          return
+        }
+      }
+    }
+    setDisableOrderBtn(false)
   }
 
   return (
@@ -73,17 +100,29 @@ function ContactForm() {
         ))}
 
         <div className='Input input-container'>
-          <select className='Input InputElement'>
+          <select
+            value={deliveryOption}
+            onChange={value => setDeliveryOption(value.target.value)}
+            className='Input InputElement'
+          >
             <option value='fastest'>Fastest</option>
             <option value='cheapest'>Cheapest</option>
           </select>
         </div>
-        <button disabled='' className='Button Success'>
+        <button
+          disabled={disableOrderBtn}
+          onClick={handleOrder}
+          className={`Button Success ${disableOrderBtn && 'form-btn-disable'}`}
+        >
           ORDER
         </button>
       </form>
     </div>
   )
+}
+
+ContactForm.propTypes = {
+  handleOrder: PropsTypes.func.isRequired
 }
 
 export default ContactForm

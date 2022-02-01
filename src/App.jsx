@@ -11,9 +11,11 @@ import Checkout from './app/pages/checkout/Checkout'
 // Context
 import { UserProvider } from './app/context/userContext'
 import { IngredientProvider } from './app/context/ingredientContext'
+import { OrderProvider } from './app/context/ordersContext'
 
 function App(props) {
   const [currentUser, setCurrentUser] = useState(false)
+  const [orders, setOrders] = useState([])
   const [ingredients, setIngredients] = useState([
     {
       id: 1,
@@ -49,15 +51,17 @@ function App(props) {
     <div>
       <IngredientProvider value={{ ingredients, setIngredients }}>
         <UserProvider value={{ currentUser, setCurrentUser }}>
-          <MyAppbar />
-          <main className='main-body'>
-            <Routes>
-              <Route path='/' exact element={<Home {...props} />} />
-              <Route path='/login' exact element={<Login {...props} />} />
-              <Route path='/checkout' exact element={<Checkout {...props} />} />
-              <Route path='/orders' exact element={<Orders {...props} />} />
-            </Routes>
-          </main>
+          <OrderProvider value={{ orders, setOrders }}>
+            <MyAppbar />
+            <main className='main-body'>
+              <Routes>
+                <Route path='/' exact element={<Home {...props} />} />
+                <Route path='/login' exact element={<Login {...props} />} />
+                <Route path='/checkout' exact element={<Checkout {...props} />} />
+                <Route path='/orders' exact element={<Orders {...props} />} />
+              </Routes>
+            </main>
+          </OrderProvider>
         </UserProvider>
       </IngredientProvider>
     </div>

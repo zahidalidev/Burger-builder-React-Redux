@@ -1,21 +1,28 @@
-import React from 'react'
+import React, { useContext } from 'react'
+
+// context
+import OrdersContext from '../../context/ordersContext'
 
 import './Orders.css'
 
 function Orders() {
+  const { orders } = useContext(OrdersContext)
+
   return (
     <div>
-      <div className='Order'>
-        <p>
-          Ingredients: <span className='c-order'>bacon (1)</span>
-          <span className='c-order'>cheese (0)</span>
-          <span className='c-order'>lettuce (0)</span>
-          <span className='c-order'>meat (0)</span>
-        </p>
-        <p>
-          Price <strong>USD 3.70</strong>
-        </p>
-      </div>
+      {orders.map(item => (
+        <div key={item.id.toString()} className='Order'>
+          <p>
+            Ingredients:
+            {item.burger.map(bur => (
+              <span key={bur.name} className='c-order'>{`${bur.name} (${bur.quantity})`}</span>
+            ))}
+          </p>
+          <p>
+            Price <strong>USD ({item.totalPrice.toFixed(2)})</strong>
+          </p>
+        </div>
+      ))}
     </div>
   )
 }

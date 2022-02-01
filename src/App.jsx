@@ -45,8 +45,6 @@ function App(props) {
     }
   ])
 
-  // const currentUser = useContext(UserContext)
-
   return (
     <div>
       <IngredientProvider value={{ ingredients, setIngredients }}>

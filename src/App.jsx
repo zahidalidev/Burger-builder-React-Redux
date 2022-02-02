@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
 // Custom components
@@ -46,6 +46,13 @@ function App(props) {
       list: []
     }
   ])
+
+  useEffect(() => {
+    let user = localStorage.getItem('user')
+    user = JSON.parse(user)
+    console.log(user)
+    setCurrentUser(user)
+  }, [])
 
   return (
     <div>

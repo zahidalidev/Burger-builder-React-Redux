@@ -48,7 +48,7 @@ function Home() {
 
   const handleOrder = () => {
     if (!currentUser) {
-      navigate('/login')
+      navigate('/login', { state: { from: 'home' } })
       return
     }
 

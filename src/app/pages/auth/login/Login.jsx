@@ -1,11 +1,12 @@
-import React, { useState, useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useContext, useEffect } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 
 import UserContext from '../../../context/userContext'
 
 import './Login.css'
 
 function Login() {
+  // states
   const [formData, setFormData] = useState([
     {
       id: 0,
@@ -24,9 +25,19 @@ function Login() {
   ])
 
   const [submitType, setSubmitType] = useState('SIGNIN')
+  const [navFrom, setNavFrom] = useState('loginBtn')
 
-  const userCont = useContext(UserContext)
   const navigate = useNavigate()
+  const { state: locationState } = useLocation()
+
+  // context
+  const userCont = useContext(UserContext)
+
+  useEffect(() => {
+    if (locationState != null) {
+      setNavFrom(locationState.from || 'loginBtn')
+    }
+  })
 
   const handleChange = (i, value) => {
     const tempData = [...formData]
@@ -53,7 +64,12 @@ function Login() {
       localStorage.setItem('user', JSON.stringify(user))
       setCurrentUser(user)
 
-      navigate('/')
+      console.log(navFrom)
+      if (navFrom === 'home') {
+        navigate('/checkout')
+      } else {
+        navigate('/')
+      }
     }
 
     handleChange(0, formData[0].value)

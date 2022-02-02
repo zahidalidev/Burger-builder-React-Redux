@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react'
-import { useNavigate } from 'react-router-dom'
+import React, { useState, useContext, useEffect } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
 import clsx from 'clsx'
 import Drawer from '@material-ui/core/Drawer'
 import List from '@material-ui/core/List'
@@ -19,16 +19,35 @@ const useStyles = makeStyles({
 })
 
 function MyAppbar() {
-  const navigate = useNavigate()
-  const { currentUser } = useContext(UserContext)
-  const classes = useStyles()
+  // states
+  const [state, setState] = useState({ left: false })
+  const [currentMenue, setCurrentMenue] = useState('/')
 
-  const [state, setState] = useState({
-    left: false
+  const navigate = useNavigate()
+  const classes = useStyles()
+  const { pathname } = useLocation()
+
+  // context
+  const { currentUser, setCurrentUser } = useContext(UserContext)
+
+  useEffect(() => {
+    console.log('locationState: ', pathname)
+    setCurrentMenue(pathname)
   })
 
   const toggleDrawer = open => () => {
     setState({ ...state, left: open })
+  }
+
+  const handleLogout = () => {
+    localStorage.removeItem('user')
+    setCurrentUser(false)
+    navigate('/')
+  }
+
+  const handleNavigation = menue => {
+    setCurrentMenue(menue)
+    navigate(menue)
   }
 
   const list = anchor => (
@@ -84,32 +103,44 @@ function MyAppbar() {
           <a onClick={toggleDrawer(true)} className='fa fa-bars'></a>
         </button>
 
-        <img className='logo' onClick={() => navigate('/')} src={logo} />
+        <img className='logo' onClick={() => handleNavigation('/')} src={logo} />
 
         {/* collabseable */}
         <div className='collapse navbar-collapse justify-content-between px-3' id='navbarCollapse'>
           <ul className='navbar-nav nav-list ml-auto py-0'>
-            <li className='nav-item d-flex align-items-center active-menue'>
-              <a onClick={() => navigate('/')} className='nav-link'>
+            <li
+              className={`nav-item d-flex align-items-center ${
+                currentMenue === '/' ? 'active-menue' : null
+              }`}
+            >
+              <a onClick={() => handleNavigation('/')} className='nav-link'>
                 Burger Builder
               </a>
             </li>
             {currentUser ? (
               <>
-                <li className='nav-item d-flex align-items-center'>
-                  <a onClick={() => navigate('/orders')} className='nav-link'>
+                <li
+                  className={`nav-item d-flex align-items-center ${
+                    currentMenue === '/orders' ? 'active-menue' : null
+                  }`}
+                >
+                  <a onClick={() => handleNavigation('/orders')} className='nav-link'>
                     Orders
                   </a>
                 </li>
-                <li className='nav-item d-flex align-items-center'>
-                  <a onClick={() => navigate('/login')} className='nav-link'>
+                <li className={`nav-item d-flex align-items-center`}>
+                  <a onClick={handleLogout} className='nav-link'>
                     Logout
                   </a>
                 </li>
               </>
             ) : (
-              <li className='nav-item d-flex align-items-center'>
-                <a onClick={() => navigate('/login')} className='nav-link'>
+              <li
+                className={`nav-item d-flex align-items-center ${
+                  currentMenue === '/login' ? 'active-menue' : null
+                }`}
+              >
+                <a onClick={() => handleNavigation('/login')} className='nav-link'>
                   Login
                 </a>
               </li>

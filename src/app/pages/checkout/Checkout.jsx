@@ -68,9 +68,7 @@ function Checkout() {
   return (
     <div className='CheckoutSummary'>
       <h1>We hope it tastes well!</h1>
-      <div>
-        <Burger ingredients={ingredients} />
-      </div>
+      <Burger ingredients={ingredients} />
       <button onClick={() => handleAction(false)} className='Button main-btn Danger'>
         Cancel
       </button>

@@ -10,47 +10,17 @@ import Checkout from './app/pages/checkout/Checkout'
 
 // Context
 import { UserProvider } from './app/context/userContext'
-import { IngredientProvider } from './app/context/ingredientContext'
+import IngredientContext, { IngredientProvider } from './app/context/ingredientContext'
 import { OrderProvider } from './app/context/ordersContext'
 
 function App(props) {
   const [currentUser, setCurrentUser] = useState(false)
   const [orders, setOrders] = useState([])
-  const [ingredients, setIngredients] = useState([
-    {
-      id: 1,
-      name: 'Lettuce',
-      lessDisable: true,
-      price: 0.5,
-      list: []
-    },
-    {
-      id: 2,
-      name: 'Bacon',
-      lessDisable: true,
-      price: 0.7,
-      list: []
-    },
-    {
-      id: 3,
-      name: 'Cheese',
-      lessDisable: true,
-      price: 0.4,
-      list: []
-    },
-    {
-      id: 4,
-      name: 'Meat',
-      lessDisable: true,
-      price: 1.3,
-      list: []
-    }
-  ])
+  const [ingredients, setIngredients] = useState(IngredientContext._currentValue)
 
   useEffect(() => {
     let user = localStorage.getItem('user')
     user = JSON.parse(user)
-    console.log(user)
     setCurrentUser(user)
   }, [])
 

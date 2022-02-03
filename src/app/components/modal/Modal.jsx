@@ -22,7 +22,7 @@ function Modal({ handleModal, currentTotalPrice }) {
           ))}
         </ul>
         <p>
-          <strong>Total Price: {`$${currentTotalPrice}`}</strong>
+          <strong>Total Price: {`$${currentTotalPrice.toFixed(2)}`}</strong>
         </p>
         <p>Continue to Checkout?</p>
         <button onClick={() => handleModal(false)} className='Button Danger'>

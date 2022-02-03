@@ -1,5 +1,6 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
+import validator from 'validator'
 
 import UserContext from '../../../context/userContext'
 
@@ -51,6 +52,13 @@ function Login() {
 
   const handleLogin = e => {
     e.preventDefault()
+
+    const tempData = [...formData]
+    if (!validator.isEmail(formData[0].value)) {
+      formData[0].error = true
+      setFormData(tempData)
+      return
+    }
 
     const user = {
       email: formData[0].value,

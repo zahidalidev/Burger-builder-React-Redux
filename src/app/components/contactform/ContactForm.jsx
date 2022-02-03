@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import PropsTypes from 'prop-types'
+import validator from 'validator'
 
 // custom components
 import './ContactForm.css'
@@ -82,6 +83,20 @@ function ContactForm({ handleOrder }) {
     setDisableOrderBtn(false)
   }
 
+  const handleValidateOrder = e => {
+    e.preventDefault()
+
+    const tempData = [...formData]
+    if (!validator.isEmail(formData[4].value)) {
+      formData[4].error = true
+      setFormData(tempData)
+      setDisableOrderBtn(true)
+      return
+    }
+
+    handleOrder()
+  }
+
   return (
     <div className='ContactData'>
       <h4>Enter your Contact Data</h4>
@@ -111,7 +126,7 @@ function ContactForm({ handleOrder }) {
         </div>
         <button
           disabled={disableOrderBtn}
-          onClick={handleOrder}
+          onClick={handleValidateOrder}
           className={`Button Success ${disableOrderBtn && 'form-btn-disable'}`}
         >
           ORDER

@@ -1,22 +1,11 @@
 import React, { useState, useContext, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
-import clsx from 'clsx'
 import Drawer from '@material-ui/core/Drawer'
 import List from '@material-ui/core/List'
-import { makeStyles } from '@material-ui/core/styles'
 
 import UserContext from '../../context/userContext'
 import logo from '../../assets/burger-logo.b8503d26.png'
 import './MyAppbar.css'
-
-const useStyles = makeStyles({
-  list: {
-    width: 250
-  },
-  fullList: {
-    width: 'auto'
-  }
-})
 
 function MyAppbar() {
   // states
@@ -24,7 +13,6 @@ function MyAppbar() {
   const [currentMenue, setCurrentMenue] = useState('/')
 
   const navigate = useNavigate()
-  const classes = useStyles()
   const { pathname } = useLocation()
 
   // context
@@ -49,37 +37,49 @@ function MyAppbar() {
     navigate(menue)
   }
 
-  const list = anchor => (
-    <div
-      className={clsx(classes.list, {
-        [classes.fullList]: anchor === 'top' || anchor === 'bottom'
-      })}
-      role='presentation'
-      onClick={toggleDrawer(false)}
-      onKeyDown={toggleDrawer(false)}
-    >
+  const list = () => (
+    <div className='drawer-fullList' onClick={toggleDrawer(false)}>
+      <img className='drawer-logo' onClick={() => handleNavigation('/')} src={logo} />
       <List>
-        <a
-          style={{
-            cursor: 'pointer'
-          }}
-          onClick={() => {}}
-          className='nav-item nav-link '
-        >
-          Home
-        </a>
-        <hr />
-
-        <a
-          style={{
-            cursor: 'pointer'
-          }}
-          onClick={() => {}}
-          className='nav-item nav-link'
-        >
-          Aboutlogo
-        </a>
-        <hr />
+        <ul className='navbar-nav drawer-list'>
+          <li
+            className={`d-flex align-items-center ${
+              currentMenue === '/' ? 'active-menue-drawer' : null
+            }`}
+          >
+            <a onClick={() => handleNavigation('/')} className='nav-link'>
+              Burger Builder
+            </a>
+          </li>
+          {currentUser ? (
+            <>
+              <li
+                className={`d-flex align-items-center ${
+                  currentMenue === '/orders' ? 'active-menue-drawer' : null
+                }`}
+              >
+                <a onClick={() => handleNavigation('/orders')} className='nav-link'>
+                  Orders
+                </a>
+              </li>
+              <li className={`d-flex align-items-center`}>
+                <a onClick={handleLogout} className='nav-link'>
+                  Logout
+                </a>
+              </li>
+            </>
+          ) : (
+            <li
+              className={`d-flex align-items-center ${
+                currentMenue === '/login' ? 'active-menue-drawer' : null
+              }`}
+            >
+              <a onClick={() => handleNavigation('/login')} className='nav-link'>
+                Login
+              </a>
+            </li>
+          )}
+        </ul>
       </List>
     </div>
   )
@@ -87,7 +87,7 @@ function MyAppbar() {
   return (
     <header className='header text-white'>
       <Drawer open={state['left']} onClose={toggleDrawer(false)}>
-        {list('left')}
+        {list()}
       </Drawer>
 
       <nav className='navbar navbar-expand-lg py-3 py-lg-0'>

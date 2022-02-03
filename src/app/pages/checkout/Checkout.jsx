@@ -13,6 +13,7 @@ import OrdersContext from '../../context/ordersContext'
 
 // utils
 import burgerTotalPrice from '../../utils/burgerTotalPrice'
+import defaultIngredients from '../../utils/defaultIngredients'
 
 function Checkout() {
   const [showForm, setshowForm] = useState(false)
@@ -27,19 +28,9 @@ function Checkout() {
     setCurrentTotalPrice(burgerTotalPrice(ingredients))
   }, [ingredients])
 
-  const handleIngredients = () => {
-    const tempIngredients = [...ingredients]
-    for (let i = 0; i < tempIngredients.length; i++) {
-      tempIngredients[i].list = []
-      tempIngredients[i].lessDisable = true
-    }
-
-    setIngredients(tempIngredients)
-  }
-
   const handleAction = action => {
     if (!action) {
-      handleIngredients()
+      setIngredients(defaultIngredients(ingredients))
       navigate('/')
     } else {
       setshowForm(true)
@@ -60,7 +51,7 @@ function Checkout() {
       totalPrice: currentTotalPrice
     }
     setOrders([...orders, orderDetail])
-    navigate('/')
+    handleAction(false)
   }
 
   return (

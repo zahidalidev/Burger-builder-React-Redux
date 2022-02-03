@@ -10,8 +10,8 @@ function Orders() {
 
   return (
     <div>
-      {orders.map(item => (
-        <div key={item.id.toString()} className='Order'>
+      {orders.map((item, i) => (
+        <div key={i.toString()} className='Order'>
           <p>
             Ingredients:
             {item.burger.map(bur => (

@@ -72,7 +72,6 @@ function Login() {
       localStorage.setItem('user', JSON.stringify(user))
       setCurrentUser(user)
 
-      console.log(navFrom)
       if (navFrom === 'home') {
         navigate('/checkout')
       } else {

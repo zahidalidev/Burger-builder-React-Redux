@@ -11,6 +11,9 @@ import ContactForm from '../../components/contactform/ContactForm'
 import IngredientContext from '../../context/ingredientContext'
 import OrdersContext from '../../context/ordersContext'
 
+// utils
+import burgerTotalPrice from '../../utils/burgerTotalPrice'
+
 function Checkout() {
   const [showForm, setshowForm] = useState(false)
   const [currentTotalPrice, setCurrentTotalPrice] = useState(3)
@@ -21,11 +24,7 @@ function Checkout() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    let price = 3
-    ingredients.map(item => {
-      price += item.price * item.list.length
-    })
-    setCurrentTotalPrice(price)
+    setCurrentTotalPrice(burgerTotalPrice(ingredients))
   }, [ingredients])
 
   const handleIngredients = () => {
@@ -60,7 +59,6 @@ function Checkout() {
       burger: tempOrder,
       totalPrice: currentTotalPrice
     }
-    console.log('orderDetail: ', orderDetail)
     setOrders([...orders, orderDetail])
     navigate('/')
   }

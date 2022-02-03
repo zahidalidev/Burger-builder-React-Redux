@@ -31,7 +31,6 @@ function MyAppbar() {
   const { currentUser, setCurrentUser } = useContext(UserContext)
 
   useEffect(() => {
-    console.log('locationState: ', pathname)
     setCurrentMenue(pathname)
   })
 

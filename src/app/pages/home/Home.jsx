@@ -12,6 +12,9 @@ import Modal from '../../components/modal/Modal'
 import UserContext from '../../context/userContext'
 import IngredientContext from '../../context/ingredientContext'
 
+// utils
+import burgerTotalPrice from '../../utils/burgerTotalPrice'
+
 function Home() {
   const [modal, setModal] = useState(false)
   const [currentTotalPrice, setCurrentTotalPrice] = useState(3)
@@ -22,11 +25,7 @@ function Home() {
   const navigate = useNavigate()
 
   useEffect(() => {
-    let price = 3
-    ingredients.map(item => {
-      price += item.price * item.list.length
-    })
-    setCurrentTotalPrice(price)
+    setCurrentTotalPrice(burgerTotalPrice(ingredients))
   }, [ingredients])
 
   const handleIngredients = (i, type) => {

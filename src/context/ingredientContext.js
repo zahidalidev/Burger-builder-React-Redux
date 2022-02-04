@@ -2,30 +2,26 @@ import { createContext } from 'react'
 
 const IngredientContext = createContext([
   {
-    id: 1,
+    id: 0,
     name: 'Lettuce',
-    lessDisable: true,
     price: 0.5,
     quantity: 0
   },
   {
-    id: 2,
+    id: 1,
     name: 'Bacon',
-    lessDisable: true,
     price: 0.7,
     quantity: 0
   },
   {
-    id: 3,
+    id: 2,
     name: 'Cheese',
-    lessDisable: true,
     price: 0.4,
     quantity: 0
   },
   {
-    id: 4,
+    id: 3,
     name: 'Meat',
-    lessDisable: true,
     price: 1.3,
     quantity: 0
   }

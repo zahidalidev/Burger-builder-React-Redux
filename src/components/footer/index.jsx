@@ -11,6 +11,8 @@ function Footer({ handleIngredients, handleOrder, currentTotalPrice }) {
   const { currentUser } = useContext(UserContext)
   const { ingredients } = useContext(IngredientContext)
 
+  const isDisable = item => item.quantity === 0
+
   return (
     <div className='BuildControls'>
       <p>
@@ -22,8 +24,8 @@ function Footer({ handleIngredients, handleOrder, currentTotalPrice }) {
           <div className='BuildControl Label'>{item.name}</div>
           <button
             onClick={() => handleIngredients(i, 'remove')}
-            className={`BuildControl ${item.lessDisable && 'buil-btn-disabled'} less less-active`}
-            disabled={item.lessDisable}
+            className={`BuildControl ${isDisable(item) && 'buil-btn-disabled'} less less-active`}
+            disabled={isDisable(item)}
           >
             Less
           </button>

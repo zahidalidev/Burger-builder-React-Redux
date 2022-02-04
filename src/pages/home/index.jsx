@@ -1,17 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-// Custom components
-import Burger from '../../components/burger/Burger'
-import Footer from '../../components/footer/Footer'
-import Modal from '../../components/modal/Modal'
+import Burger from 'components/burger'
+import Footer from 'components/footer'
+import Modal from 'components/modal'
 
-// Context
-import UserContext from '../../context/userContext'
-import IngredientContext from '../../context/ingredientContext'
+import UserContext from 'context/userContext'
+import IngredientContext from 'context/ingredientContext'
 
-// utils
-import burgerTotalPrice from '../../utils/burgerTotalPrice'
+import burgerTotalPrice from 'utils/burgerTotalPrice'
 
 function Home() {
   const [modal, setModal] = useState(false)

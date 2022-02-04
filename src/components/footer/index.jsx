@@ -2,10 +2,10 @@ import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 
 // context
-import UserContext from '../../context/userContext'
-import IngredientContext from '../../context/ingredientContext'
+import UserContext from 'context/userContext'
+import IngredientContext from 'context/ingredientContext'
 
-import './footer.css'
+import 'components/footer/styles.css'
 
 function Footer({ handleIngredients, handleOrder, currentTotalPrice }) {
   const { currentUser } = useContext(UserContext)

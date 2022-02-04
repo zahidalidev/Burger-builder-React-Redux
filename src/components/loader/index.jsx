@@ -1,6 +1,6 @@
 import React from 'react'
 
-import './loadingBars.css'
+import 'components/loader/styles.css'
 
 function LoadingBars() {
   return (

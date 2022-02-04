@@ -2,9 +2,9 @@ import React, { useState, useContext, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import validator from 'validator'
 
-import UserContext from '../../../context/userContext'
+import UserContext from 'context/userContext'
 
-import './login.css'
+import 'pages/auth/login/styles.css'
 
 function Login() {
   // states

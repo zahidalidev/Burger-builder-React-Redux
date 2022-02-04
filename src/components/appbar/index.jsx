@@ -3,9 +3,11 @@ import { useNavigate, useLocation } from 'react-router-dom'
 import Drawer from '@material-ui/core/Drawer'
 import List from '@material-ui/core/List'
 
-import UserContext from '../../context/userContext'
-import logo from '../../assets/burger-logo.b8503d26.png'
-import './myAppbar.css'
+import UserContext from 'context/userContext'
+
+import 'components/appbar/styles.css'
+
+import logo from 'assets/burger-logo.b8503d26.png'
 
 function MyAppbar() {
   // states

@@ -1,9 +1,8 @@
 import React, { useContext } from 'react'
 
-// context
-import IngredientContext from '../../context/ingredientContext'
+import IngredientContext from 'context/ingredientContext'
 
-import './ingredient.css'
+import 'components/ingredient/styles.css'
 
 function Ingredient() {
   const { ingredients } = useContext(IngredientContext)

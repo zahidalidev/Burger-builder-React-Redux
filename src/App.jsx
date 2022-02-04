@@ -1,17 +1,15 @@
 import { useEffect, useState } from 'react'
 import { Route, Routes } from 'react-router-dom'
 
-// Custom components
-import Home from './app/pages/home/Home'
-import MyAppbar from './app/components/appbar/MyAppbar'
-import Orders from './app/pages/orders/Orders'
-import Login from './app/pages/auth/login/Login'
-import Checkout from './app/pages/checkout/Checkout'
+import Home from 'pages/home'
+import MyAppbar from 'components/appbar'
+import Orders from 'pages/orders'
+import Login from 'pages/auth/login'
+import Checkout from 'pages/checkout'
 
-// Context
-import { UserProvider } from './app/context/userContext'
-import IngredientContext, { IngredientProvider } from './app/context/ingredientContext'
-import { OrderProvider } from './app/context/ordersContext'
+import { UserProvider } from 'context/userContext'
+import IngredientContext, { IngredientProvider } from 'context/ingredientContext'
+import { OrderProvider } from 'context/ordersContext'
 
 function App(props) {
   const [currentUser, setCurrentUser] = useState(false)

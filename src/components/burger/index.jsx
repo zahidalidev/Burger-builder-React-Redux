@@ -1,8 +1,8 @@
 import React from 'react'
 
-import Ingredient from '../ingredient/Ingredient'
+import Ingredient from 'components/ingredient'
 
-import './burger.css'
+import 'components/burger/styles.css'
 
 function Burger() {
   return (

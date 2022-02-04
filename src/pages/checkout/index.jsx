@@ -1,19 +1,16 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import './checkout.css'
+import Burger from 'components/burger'
+import ContactForm from 'components/contactform'
 
-// custom components
-import Burger from '../../components/burger/Burger'
-import ContactForm from '../../components/contactform/ContactForm'
+import IngredientContext from 'context/ingredientContext'
+import OrdersContext from 'context/ordersContext'
 
-// context
-import IngredientContext from '../../context/ingredientContext'
-import OrdersContext from '../../context/ordersContext'
+import burgerTotalPrice from 'utils/burgerTotalPrice'
+import defaultIngredients from 'utils/defaultIngredients'
 
-// utils
-import burgerTotalPrice from '../../utils/burgerTotalPrice'
-import defaultIngredients from '../../utils/defaultIngredients'
+import 'pages/checkout/styles.css'
 
 function Checkout() {
   const [showForm, setshowForm] = useState(false)
@@ -30,6 +27,7 @@ function Checkout() {
 
   const handleAction = action => {
     if (!action) {
+      console.log('defaultIngredients(ingredients): ', defaultIngredients(ingredients))
       setIngredients(defaultIngredients(ingredients))
       navigate('/')
     } else {
@@ -38,13 +36,11 @@ function Checkout() {
   }
 
   const handleOrder = () => {
-    let tempOrder = []
-    for (let i = 0; i < ingredients.length; i++) {
-      let tempObj = {}
-      tempObj.name = ingredients[i].name
-      tempObj.quantity = ingredients[i].quantity
-      tempOrder.push(tempObj)
-    }
+    let tempOrder = ingredients.map(item => ({
+      name: item.name,
+      quantity: item.quantity
+    }))
+
     let orderDetail = {
       id: tempOrder.length + 1,
       burger: tempOrder,

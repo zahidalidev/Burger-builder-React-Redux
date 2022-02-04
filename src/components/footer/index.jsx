@@ -12,6 +12,7 @@ function Footer({ handleIngredients, handleOrder, currentTotalPrice }) {
   const { ingredients } = useContext(IngredientContext)
 
   const isDisable = item => item.quantity === 0
+  const isOrderActive = currentTotalPrice > 3
 
   return (
     <div className='BuildControls'>
@@ -40,7 +41,7 @@ function Footer({ handleIngredients, handleOrder, currentTotalPrice }) {
 
       <button
         className={`BuildControls OrderButton text-uppercase ${
-          currentTotalPrice > 3 ? 'OrderButton-active' : 'OrderButton-disabled'
+          isOrderActive ? 'OrderButton-active' : 'OrderButton-disabled'
         }`}
         disabled={currentTotalPrice == 3}
         onClick={handleOrder}

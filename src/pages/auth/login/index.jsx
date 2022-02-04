@@ -7,7 +7,6 @@ import UserContext from 'context/userContext'
 import 'pages/auth/login/styles.css'
 
 function Login() {
-  // states
   const [formData, setFormData] = useState([
     {
       id: 0,
@@ -31,7 +30,6 @@ function Login() {
   const navigate = useNavigate()
   const { state: locationState } = useLocation()
 
-  // context
   const userCont = useContext(UserContext)
 
   useEffect(() => {
@@ -43,14 +41,7 @@ function Login() {
   const handleChange = (i, value) => {
     const tempData = [...formData]
     tempData[i].value = value
-
-    let validLength = 7
-    if (i === 0) {
-      validLength = 1
-    }
-
-    tempData[i].error = tempData[i].value.length < validLength
-
+    tempData[i].error = i === 0 ? tempData[i].value.length < 1 : tempData[i].value.length < 7
     setFormData(tempData)
   }
 
@@ -69,9 +60,7 @@ function Login() {
       password: formData[1].value
     }
 
-    const valid = formData[0].value.length > 0 && formData[1].value.length > 6
-
-    if (valid) {
+    if (user.email.length > 0 && user.password.length > 6) {
       const { setCurrentUser } = userCont
       localStorage.setItem('user', JSON.stringify(user))
       setCurrentUser(user)
@@ -86,6 +75,18 @@ function Login() {
     handleChange(0, formData[0].value)
     handleChange(1, formData[1].value)
   }
+
+  const signinBtn = (
+    <button onClick={() => setSubmitType('REGISTER')} className='Button Danger'>
+      SIGNIN
+    </button>
+  )
+
+  const registerBtn = (
+    <button onClick={() => setSubmitType('SIGNIN')} className='Button Danger'>
+      REGISTER
+    </button>
+  )
 
   return (
     <main className='Layout Content'>
@@ -108,15 +109,7 @@ function Login() {
           </button>
         </form>
 
-        {submitType === 'SIGNIN' ? (
-          <button onClick={() => setSubmitType('REGISTER')} className='Button Danger'>
-            SIGNIN
-          </button>
-        ) : (
-          <button onClick={() => setSubmitType('SIGNIN')} className='Button Danger'>
-            REGISTER
-          </button>
-        )}
+        {submitType === 'SIGNIN' ? signinBtn : registerBtn}
       </div>
     </main>
   )

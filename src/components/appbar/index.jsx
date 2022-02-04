@@ -9,19 +9,21 @@ import 'components/appbar/styles.css'
 
 import logo from 'assets/burger-logo.b8503d26.png'
 
-function MyAppbar() {
-  // states
+const MyAppbar = () => {
   const [state, setState] = useState({ left: false })
-  const [currentMenue, setCurrentMenue] = useState('/')
+  const [currentMenu, setCurrentMenu] = useState('/')
 
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
-  // context
   const { currentUser, setCurrentUser } = useContext(UserContext)
 
+  const isLogin = currentMenu === '/login'
+  const isOrders = currentMenu === '/orders'
+  const isHome = currentMenu === '/'
+
   useEffect(() => {
-    setCurrentMenue(pathname)
+    setCurrentMenu(pathname)
   })
 
   const toggleDrawer = open => () => {
@@ -34,9 +36,9 @@ function MyAppbar() {
     navigate('/')
   }
 
-  const handleNavigation = menue => {
-    setCurrentMenue(menue)
-    navigate(menue)
+  const handleNavigation = menu => {
+    setCurrentMenu(menu)
+    navigate(menu)
   }
 
   const list = () => (
@@ -44,22 +46,14 @@ function MyAppbar() {
       <img className='drawer-logo' onClick={() => handleNavigation('/')} src={logo} />
       <List>
         <ul className='navbar-nav drawer-list'>
-          <li
-            className={`d-flex align-items-center ${
-              currentMenue === '/' ? 'active-menue-drawer' : null
-            }`}
-          >
+          <li className={`d-flex align-items-center ${isHome ? 'active-menu-drawer' : null}`}>
             <a onClick={() => handleNavigation('/')} className='nav-link'>
               Burger Builder
             </a>
           </li>
           {currentUser ? (
             <>
-              <li
-                className={`d-flex align-items-center ${
-                  currentMenue === '/orders' ? 'active-menue-drawer' : null
-                }`}
-              >
+              <li className={`d-flex align-items-center ${isOrders ? 'active-menu-drawer' : null}`}>
                 <a onClick={() => handleNavigation('/orders')} className='nav-link'>
                   Orders
                 </a>
@@ -71,11 +65,7 @@ function MyAppbar() {
               </li>
             </>
           ) : (
-            <li
-              className={`d-flex align-items-center ${
-                currentMenue === '/login' ? 'active-menue-drawer' : null
-              }`}
-            >
+            <li className={`d-flex align-items-center ${isLogin ? 'active-menu-drawer' : null}`}>
               <a onClick={() => handleNavigation('/login')} className='nav-link'>
                 Login
               </a>
@@ -109,11 +99,7 @@ function MyAppbar() {
         {/* collabseable */}
         <div className='collapse navbar-collapse justify-content-between px-3' id='navbarCollapse'>
           <ul className='navbar-nav nav-list ml-auto py-0'>
-            <li
-              className={`nav-item d-flex align-items-center ${
-                currentMenue === '/' ? 'active-menue' : null
-              }`}
-            >
+            <li className={`nav-item d-flex align-items-center ${isHome ? 'active-menu' : null}`}>
               <a onClick={() => handleNavigation('/')} className='nav-link'>
                 Burger Builder
               </a>
@@ -122,7 +108,7 @@ function MyAppbar() {
               <>
                 <li
                   className={`nav-item d-flex align-items-center ${
-                    currentMenue === '/orders' ? 'active-menue' : null
+                    isOrders ? 'active-menu' : null
                   }`}
                 >
                   <a onClick={() => handleNavigation('/orders')} className='nav-link'>
@@ -137,9 +123,7 @@ function MyAppbar() {
               </>
             ) : (
               <li
-                className={`nav-item d-flex align-items-center ${
-                  currentMenue === '/login' ? 'active-menue' : null
-                }`}
+                className={`nav-item d-flex align-items-center ${isLogin ? 'active-menu' : null}`}
               >
                 <a onClick={() => handleNavigation('/login')} className='nav-link'>
                   Login

@@ -51,13 +51,8 @@ function ContactForm({ handleOrder }) {
   const handleChange = (i, value) => {
     const tempData = [...formData]
     tempData[i].value = value
+    tempData[i].error = i === 2 ? tempData[i].value.length != 5 : tempData[i].value.length < 1
 
-    const validLength = i === 2 ? 5 : 1
-    if (i === 2) {
-      tempData[i].error = tempData[i].value.length != validLength
-    } else {
-      tempData[i].error = tempData[i].value.length < validLength
-    }
     setFormData(tempData)
     handleOrderButton()
   }

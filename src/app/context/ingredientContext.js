@@ -6,28 +6,28 @@ const IngredientContext = createContext([
     name: 'Lettuce',
     lessDisable: true,
     price: 0.5,
-    list: []
+    quantity: 0
   },
   {
     id: 2,
     name: 'Bacon',
     lessDisable: true,
     price: 0.7,
-    list: []
+    quantity: 0
   },
   {
     id: 3,
     name: 'Cheese',
     lessDisable: true,
     price: 0.4,
-    list: []
+    quantity: 0
   },
   {
     id: 4,
     name: 'Meat',
     lessDisable: true,
     price: 1.3,
-    list: []
+    quantity: 0
   }
 ])
 

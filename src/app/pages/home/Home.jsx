@@ -1,8 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import './home.css'
-
 // Custom components
 import Burger from '../../components/burger/Burger'
 import Footer from '../../components/footer/Footer'
@@ -31,13 +29,13 @@ function Home() {
   const handleIngredients = (i, type) => {
     const tempIngredients = [...ingredients]
     if (type === 'add') {
-      tempIngredients[i].list.push(1)
-      if (tempIngredients[i].list.length > 0) {
+      tempIngredients[i].quantity += 1
+      if (tempIngredients[i].quantity > 0) {
         tempIngredients[i].lessDisable = false
       }
     } else {
-      tempIngredients[i].list.pop()
-      if (tempIngredients[i].list.length === 0) {
+      tempIngredients[i].quantity -= 1
+      if (tempIngredients[i].quantity === 0) {
         tempIngredients[i].lessDisable = true
       }
     }

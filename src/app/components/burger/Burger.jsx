@@ -7,10 +7,10 @@ import './burger.css'
 
 function Burger({ ingredients }) {
   const ingreExist =
-    ingredients[0].list.length > 0 ||
-    ingredients[1].list.length > 0 ||
-    ingredients[2].list.length > 0 ||
-    ingredients[3].list.length > 0
+    ingredients[0].quantity > 0 ||
+    ingredients[1].quantity > 0 ||
+    ingredients[2].quantity > 0 ||
+    ingredients[3].quantity > 0
 
   return (
     <div className='Burger'>
@@ -20,7 +20,9 @@ function Burger({ ingredients }) {
       </div>
       {!ingreExist ? <p>No Ingredients Added</p> : null}
       {ingredients.map(item =>
-        item.list.map((item2, index) => <Ingredient key={index.toString} name={item.name} />)
+        [...Array(item.quantity)].map((item2, index) => (
+          <Ingredient key={index.toString} name={item.name} />
+        ))
       )}
       <div className='BreadBottom'></div>
     </div>

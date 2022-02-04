@@ -1,6 +1,6 @@
 import React from 'react'
 
-import './LoadingBars.css'
+import './loadingBars.css'
 
 function LoadingBars() {
   return (

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 // context
 import IngredientContext from '../../context/ingredientContext'
 
-import './Modal.css'
+import './modal.css'
 
 function Modal({ handleModal, currentTotalPrice }) {
   const { ingredients } = useContext(IngredientContext)

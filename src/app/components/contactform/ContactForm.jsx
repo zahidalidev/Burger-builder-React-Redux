@@ -3,8 +3,8 @@ import PropsTypes from 'prop-types'
 import validator from 'validator'
 
 // custom components
-import './ContactForm.css'
-import '../../pages/auth/login/Login.css'
+import './contactForm.css'
+import '../../pages/auth/login/login.css'
 
 function ContactForm({ handleOrder }) {
   const [deliveryOption, setDeliveryOption] = useState('fastest')

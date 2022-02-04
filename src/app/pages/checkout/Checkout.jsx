@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
-import './Checkout.css'
+import './checkout.css'
 
 // custom components
 import Burger from '../../components/burger/Burger'

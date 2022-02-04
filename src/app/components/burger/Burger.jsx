@@ -1,7 +1,9 @@
 import React from 'react'
 import PropsTypes from 'prop-types'
 
-import './Burger.css'
+import Ingredient from '../ingredient/Ingredient'
+
+import './burger.css'
 
 function Burger({ ingredients }) {
   const ingreExist =
@@ -18,9 +20,7 @@ function Burger({ ingredients }) {
       </div>
       {!ingreExist ? <p>No Ingredients Added</p> : null}
       {ingredients.map(item =>
-        item.list.map((item2, i) => (
-          <div key={i.toString()} className={`BurgerIngredient ${item.name}`}></div>
-        ))
+        item.list.map((item2, index) => <Ingredient key={index.toString} name={item.name} />)
       )}
       <div className='BreadBottom'></div>
     </div>

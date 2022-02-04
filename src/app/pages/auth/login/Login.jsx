@@ -4,7 +4,7 @@ import validator from 'validator'
 
 import UserContext from '../../../context/userContext'
 
-import './Login.css'
+import './login.css'
 
 function Login() {
   // states

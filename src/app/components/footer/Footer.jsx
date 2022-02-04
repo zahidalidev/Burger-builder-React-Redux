@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 
 import UserContext from '../../context/userContext'
 
-import './Footer.css'
+import './footer.css'
 
 function Footer({ ingredients, handleIngredients, handleOrder, currentTotalPrice }) {
   const { currentUser } = useContext(UserContext)

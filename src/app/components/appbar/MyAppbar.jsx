@@ -5,7 +5,7 @@ import List from '@material-ui/core/List'
 
 import UserContext from '../../context/userContext'
 import logo from '../../assets/burger-logo.b8503d26.png'
-import './MyAppbar.css'
+import './myAppbar.css'
 
 function MyAppbar() {
   // states

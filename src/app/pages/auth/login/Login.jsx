@@ -44,7 +44,11 @@ function Login() {
     const tempData = [...formData]
     tempData[i].value = value
 
-    const validLength = i === 0 ? 1 : 7
+    let validLength = 7
+    if (i === 0) {
+      validLength = 1
+    }
+
     tempData[i].error = tempData[i].value.length < validLength
 
     setFormData(tempData)

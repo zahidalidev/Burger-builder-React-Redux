@@ -2,7 +2,8 @@ import React, { useState } from 'react'
 import PropsTypes from 'prop-types'
 import validator from 'validator'
 
-// custom components
+import Input from 'components/input'
+
 import 'components/contactform/styles.css'
 import 'pages/auth/login/styles.css'
 
@@ -96,17 +97,8 @@ function ContactForm({ handleOrder }) {
     <div className='ContactData'>
       <h4>Enter your Contact Data</h4>
       <form>
-        {formData.map((item, i) => (
-          <div key={item.placeHolder} className='Input input-container'>
-            <input
-              type={item.type}
-              className={`Input InputElement ${item.error && 'Invalid'}`}
-              placeholder={item.placeHolder}
-              value={item.value}
-              onChange={e => handleChange(i, e.target.value)}
-            />
-            {item.error ? <p className='Input ValidationError'>Please enter a valid </p> : null}
-          </div>
+        {formData.map((item, index) => (
+          <Input key={item.placeHolder} index={index} item={item} handleChange={handleChange} />
         ))}
 
         <div className='Input input-container'>
@@ -119,6 +111,7 @@ function ContactForm({ handleOrder }) {
             <option value='cheapest'>Cheapest</option>
           </select>
         </div>
+
         <button
           disabled={disableOrderBtn}
           onClick={handleValidateOrder}

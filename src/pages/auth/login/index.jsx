@@ -2,6 +2,8 @@ import React, { useState, useContext, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import validator from 'validator'
 
+import Input from 'components/input'
+
 import UserContext from 'context/userContext'
 
 import 'pages/auth/login/styles.css'
@@ -92,17 +94,8 @@ function Login() {
     <main className='Layout Content'>
       <div className='Auth'>
         <form>
-          {formData.map((item, i) => (
-            <div key={item.placeHolder} className='Input input-container'>
-              <input
-                type={item.type}
-                className={`Input InputElement ${item.error && 'Invalid'}`}
-                placeholder={item.placeHolder}
-                value={item.value}
-                onChange={e => handleChange(i, e.target.value)}
-              />
-              {item.error ? <p className='Input ValidationError'>Please enter a valid </p> : null}
-            </div>
+          {formData.map((item, index) => (
+            <Input key={item.placeHolder} index={index} item={item} handleChange={handleChange} />
           ))}
           <button onClick={handleLogin} className='Button Success'>
             SUBMIT

@@ -1,7 +1,8 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 
-// context
+import IngredientButton from 'components/ingredientButton'
+
 import UserContext from 'context/userContext'
 import IngredientContext from 'context/ingredientContext'
 
@@ -11,8 +12,8 @@ function Footer({ handleIngredients, handleOrder, currentTotalPrice }) {
   const { currentUser } = useContext(UserContext)
   const { ingredients } = useContext(IngredientContext)
 
-  const isDisable = item => item.quantity === 0
   const isOrderActive = currentTotalPrice > 3
+  const orderBtnLable = currentUser ? 'Order now' : 'Sign up to order'
 
   return (
     <div className='BuildControls'>
@@ -20,23 +21,13 @@ function Footer({ handleIngredients, handleOrder, currentTotalPrice }) {
         Current price: <strong>{`$${currentTotalPrice.toFixed(2)}`}</strong>
       </p>
 
-      {ingredients.map((item, i) => (
-        <div key={item.id.toString()} className='BuildControl'>
-          <div className='BuildControl Label'>{item.name}</div>
-          <button
-            onClick={() => handleIngredients(i, 'remove')}
-            className={`BuildControl ${isDisable(item) && 'buil-btn-disabled'} less less-active`}
-            disabled={isDisable(item)}
-          >
-            Less
-          </button>
-          <button
-            onClick={() => handleIngredients(i, 'add')}
-            className='BuildControl more more-active'
-          >
-            More
-          </button>
-        </div>
+      {ingredients.map((item, index) => (
+        <IngredientButton
+          key={item.id.toString()}
+          index={index}
+          item={item}
+          handleIngredients={handleIngredients}
+        />
       ))}
 
       <button
@@ -46,7 +37,7 @@ function Footer({ handleIngredients, handleOrder, currentTotalPrice }) {
         disabled={currentTotalPrice == 3}
         onClick={handleOrder}
       >
-        {currentUser ? 'Order now' : 'Sign up to order'}
+        {orderBtnLable}
       </button>
     </div>
   )

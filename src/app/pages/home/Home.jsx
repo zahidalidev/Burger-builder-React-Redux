@@ -61,7 +61,7 @@ function Home() {
 
   return (
     <>
-      <Burger ingredients={ingredients} />
+      <Burger />
       <Footer
         handleOrder={handleOrder}
         ingredients={ingredients}

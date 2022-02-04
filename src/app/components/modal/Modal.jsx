@@ -17,7 +17,7 @@ function Modal({ handleModal, currentTotalPrice }) {
         <ul>
           {ingredients.map(item => (
             <li key={item.name}>
-              <span>{item.name}</span>: {item.list.length}
+              <span>{item.name}</span>: {item.quantity}
             </li>
           ))}
         </ul>

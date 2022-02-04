@@ -64,7 +64,6 @@ function Home() {
       <Burger />
       <Footer
         handleOrder={handleOrder}
-        ingredients={ingredients}
         handleIngredients={handleIngredients}
         currentTotalPrice={currentTotalPrice}
       />

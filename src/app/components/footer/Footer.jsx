@@ -1,12 +1,15 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 
+// context
 import UserContext from '../../context/userContext'
+import IngredientContext from '../../context/ingredientContext'
 
 import './footer.css'
 
-function Footer({ ingredients, handleIngredients, handleOrder, currentTotalPrice }) {
+function Footer({ handleIngredients, handleOrder, currentTotalPrice }) {
   const { currentUser } = useContext(UserContext)
+  const { ingredients } = useContext(IngredientContext)
 
   return (
     <div className='BuildControls'>
@@ -47,7 +50,6 @@ function Footer({ ingredients, handleIngredients, handleOrder, currentTotalPrice
 }
 
 Footer.propTypes = {
-  ingredients: PropTypes.array.isRequired,
   handleIngredients: PropTypes.func.isRequired,
   handleOrder: PropTypes.func.isRequired,
   currentTotalPrice: PropTypes.number.isRequired

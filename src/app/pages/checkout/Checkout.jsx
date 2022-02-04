@@ -42,7 +42,7 @@ function Checkout() {
     for (let i = 0; i < ingredients.length; i++) {
       let tempObj = {}
       tempObj.name = ingredients[i].name
-      tempObj.quantity = ingredients[i].list.length
+      tempObj.quantity = ingredients[i].quantity
       tempOrder.push(tempObj)
     }
     let orderDetail = {

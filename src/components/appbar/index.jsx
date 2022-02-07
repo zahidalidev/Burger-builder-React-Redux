@@ -1,37 +1,41 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import Drawer from '@material-ui/core/Drawer'
 import List from '@material-ui/core/List'
+import _ from 'lodash'
 
-import UserContext from 'context/userContext'
+import { useSelector, useDispatch } from 'react-redux'
+import { USER_LOGOUT } from 'store/user'
 
 import 'components/appbar/styles.css'
-
 import logo from 'assets/burger-logo.b8503d26.png'
 
 const MyAppbar = () => {
   const [state, setState] = useState({ left: false })
   const [currentMenu, setCurrentMenu] = useState('/')
 
+  const user = useSelector(state => state.user)
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
-  const { currentUser, setCurrentUser } = useContext(UserContext)
+  const [currentUser, setCurrentUser] = useState(false)
 
   const isLogin = currentMenu === '/login'
   const isOrders = currentMenu === '/orders'
   const isHome = currentMenu === '/'
 
   useEffect(() => {
+    setCurrentUser(user)
     setCurrentMenu(pathname)
-  })
+  }, [user, pathname])
 
   const toggleDrawer = open => () => {
     setState({ ...state, left: open })
   }
 
   const handleLogout = () => {
-    localStorage.removeItem('user')
+    dispatch(USER_LOGOUT())
     setCurrentUser(false)
     navigate('/')
   }
@@ -104,7 +108,7 @@ const MyAppbar = () => {
                 Burger Builder
               </a>
             </li>
-            {currentUser ? (
+            {!_.isEmpty(currentUser) ? (
               <>
                 <li
                   className={`nav-item d-flex align-items-center ${

@@ -1,10 +1,11 @@
-import React, { useState, useContext, useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import validator from 'validator'
+import { useDispatch } from 'react-redux'
 
 import Input from 'components/input'
 
-import UserContext from 'context/userContext'
+import { USER_LOGIN } from 'store/user'
 
 import 'pages/auth/login/styles.css'
 
@@ -26,13 +27,12 @@ function Login() {
     }
   ])
 
+  const dispatch = useDispatch()
   const [submitType, setSubmitType] = useState('SIGNIN')
   const [navFrom, setNavFrom] = useState('loginBtn')
 
   const navigate = useNavigate()
   const { state: locationState } = useLocation()
-
-  const userCont = useContext(UserContext)
 
   useEffect(() => {
     if (locationState != null) {
@@ -63,9 +63,7 @@ function Login() {
     }
 
     if (user.email.length > 0 && user.password.length > 6) {
-      const { setCurrentUser } = userCont
-      localStorage.setItem('user', JSON.stringify(user))
-      setCurrentUser(user)
+      dispatch(USER_LOGIN(user.email, user.password))
 
       if (navFrom === 'home') {
         navigate('/checkout')

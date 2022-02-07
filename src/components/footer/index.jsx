@@ -1,19 +1,19 @@
 import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
+import _ from 'lodash'
+import { useSelector } from 'react-redux'
 
 import IngredientButton from 'components/ingredientButton'
-
-import UserContext from 'context/userContext'
 import IngredientContext from 'context/ingredientContext'
 
 import 'components/footer/styles.css'
 
 function Footer({ handleIngredients, handleOrder, currentTotalPrice }) {
-  const { currentUser } = useContext(UserContext)
+  const user = useSelector(state => state.user)
   const { ingredients } = useContext(IngredientContext)
 
   const isOrderActive = currentTotalPrice > 3
-  const orderBtnLable = currentUser ? 'Order now' : 'Sign up to order'
+  const orderBtnLable = _.isEmpty(user) ? 'Sign up to order' : 'Order now'
 
   return (
     <div className='BuildControls'>

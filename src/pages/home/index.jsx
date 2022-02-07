@@ -25,18 +25,7 @@ function Home() {
 
   const handleIngredients = (i, type) => {
     const tempIngredients = [...ingredients]
-    if (type === 'add') {
-      tempIngredients[i].quantity += 1
-      if (tempIngredients[i].quantity > 0) {
-        tempIngredients[i].lessDisable = false
-      }
-    } else {
-      tempIngredients[i].quantity -= 1
-      if (tempIngredients[i].quantity === 0) {
-        tempIngredients[i].lessDisable = true
-      }
-    }
-
+    type === 'add' ? (tempIngredients[i].quantity += 1) : (tempIngredients[i].quantity -= 1)
     setIngredients(tempIngredients)
   }
 

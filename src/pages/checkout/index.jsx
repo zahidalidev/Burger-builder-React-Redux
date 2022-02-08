@@ -40,7 +40,7 @@ function Checkout() {
       quantity: item.quantity
     }))
 
-    dispatch(ADD_ORDERS(tempIngredients, currentTotalPrice))
+    dispatch(ADD_ORDERS({ ingredients: tempIngredients, totalPrice: currentTotalPrice }))
     handleAction(false)
   }
 

@@ -1,27 +1,20 @@
-const addOrders = 'ADD_ORDERS'
+import { createSlice, current } from '@reduxjs/toolkit'
 
-export const ADD_ORDERS = (ingredients, totalPrice) => ({
-  type: addOrders,
-  payload: {
-    ingredients,
-    totalPrice
+let lastId = 0
+const slice = createSlice({
+  name: 'orders',
+  initialState: [],
+  reducers: {
+    ADD_ORDERS: (state, action) => [
+      ...current(state),
+      {
+        id: ++lastId,
+        ingredients: action.payload.ingredients,
+        totalPrice: action.payload.totalPrice
+      }
+    ]
   }
 })
 
-let lastId = 0
-export default (state = [], action) => {
-  switch (action.type) {
-    case addOrders:
-      return [
-        ...state,
-        {
-          id: ++lastId,
-          ingredients: action.payload.ingredients,
-          totalPrice: action.payload.totalPrice
-        }
-      ]
-
-    default:
-      return state
-  }
-}
+export const { ADD_ORDERS } = slice.actions
+export default slice.reducer

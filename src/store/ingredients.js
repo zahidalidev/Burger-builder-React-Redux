@@ -1,24 +1,4 @@
-const addIngredient = 'ADD_INGREDIENT'
-const removeIngredient = 'REMOVE_INGREDIENT'
-const defaultIngredient = 'DEFAULT_INGREDIENT'
-
-export const ADD_INGREDIENT = id => ({
-  type: addIngredient,
-  payload: {
-    id
-  }
-})
-
-export const REMOVE_INGREDIENT = id => ({
-  type: removeIngredient,
-  payload: {
-    id
-  }
-})
-
-export const DEFAULT_INGREDIENT = () => ({
-  type: defaultIngredient
-})
+import { createSlice, current } from '@reduxjs/toolkit'
 
 const initialState = [
   {
@@ -47,22 +27,23 @@ const initialState = [
   }
 ]
 
-export default (state = initialState, action) => {
-  switch (action.type) {
-    case addIngredient:
-      return [...state].map((item, index) =>
+const slice = createSlice({
+  name: 'ingredients',
+  initialState: initialState,
+  reducers: {
+    ADD_INGREDIENT: (state, action) => {
+      return current(state).map((item, index) =>
         index === action.payload.id ? { ...item, quantity: item.quantity + 1 } : item
       )
-
-    case removeIngredient:
-      return [...state].map((item, index) =>
+    },
+    REMOVE_INGREDIENT: (state, action) => {
+      return current(state).map((item, index) =>
         index === action.payload.id ? { ...item, quantity: item.quantity - 1 } : item
       )
-
-    case defaultIngredient:
-      return [...state].map(item => ({ ...item, quantity: 0 }))
-
-    default:
-      return state
+    },
+    DEFAULT_INGREDIENT: state => current(state).map(item => ({ ...item, quantity: 0 }))
   }
-}
+})
+
+export const { ADD_INGREDIENT, REMOVE_INGREDIENT, DEFAULT_INGREDIENT } = slice.actions
+export default slice.reducer

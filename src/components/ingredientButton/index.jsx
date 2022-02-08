@@ -9,11 +9,11 @@ function IngredientButton({ item, index }) {
   const isDisable = item => item.quantity === 0
 
   const addIngredient = index => {
-    dispatch(ADD_INGREDIENT(index))
+    dispatch(ADD_INGREDIENT({ id: index }))
   }
 
   const removeIngredient = index => {
-    dispatch(REMOVE_INGREDIENT(index))
+    dispatch(REMOVE_INGREDIENT({ id: index }))
   }
 
   return (

@@ -63,7 +63,7 @@ function Login() {
     }
 
     if (user.email.length > 0 && user.password.length > 6) {
-      dispatch(USER_LOGIN(user.email, user.password))
+      dispatch(USER_LOGIN({ email: user.email, password: user.password }))
 
       if (navFrom === 'home') {
         navigate('/checkout')

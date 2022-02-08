@@ -1,29 +1,19 @@
-const userLogin = 'USER_LOGIN'
-const userLogout = 'USER_LOGOUT'
+import { createSlice } from '@reduxjs/toolkit'
 
-export const USER_LOGIN = (email, password) => ({
-  type: userLogin,
-  payload: {
-    email,
-    password
-  }
-})
-
-export const USER_LOGOUT = () => ({
-  type: userLogout
-})
-
-export default (state = {}, action) => {
-  switch (action.type) {
-    case userLogin:
+const slice = createSlice({
+  name: 'user',
+  initialState: {},
+  reducers: {
+    USER_LOGIN: (user, action) => {
       localStorage.setItem('user', JSON.stringify(action.payload))
-      return { ...action.payload }
-
-    case userLogout:
+      return action.payload
+    },
+    USER_LOGOUT: () => {
       localStorage.removeItem('user')
       return {}
-
-    default:
-      return state
+    }
   }
-}
+})
+
+export const { USER_LOGIN, USER_LOGOUT } = slice.actions
+export default slice.reducer

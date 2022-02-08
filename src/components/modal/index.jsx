@@ -1,12 +1,19 @@
-import React, { useContext } from 'react'
+import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 
-import IngredientContext from 'context/ingredientContext'
+import burgerTotalPrice from 'utils/burgerTotalPrice'
 
 import 'components/modal/styles.css'
+import { useSelector } from 'react-redux'
 
-function Modal({ handleModal, currentTotalPrice }) {
-  const { ingredients } = useContext(IngredientContext)
+function Modal({ handleModal }) {
+  const [currentTotalPrice, setCurrentTotalPrice] = useState(3)
+
+  const ingredients = useSelector(state => state.ingredients)
+
+  useEffect(() => {
+    setCurrentTotalPrice(burgerTotalPrice(ingredients))
+  }, [ingredients])
 
   return (
     <>
@@ -21,7 +28,7 @@ function Modal({ handleModal, currentTotalPrice }) {
           ))}
         </ul>
         <p>
-          <strong>Total Price: {`$${currentTotalPrice.toFixed(2)}`}</strong>
+          <strong>Total Price: {`$${currentTotalPrice}`}</strong>
         </p>
         <p>Continue to Checkout?</p>
         <button onClick={() => handleModal(false)} className='Button Danger'>
@@ -36,8 +43,7 @@ function Modal({ handleModal, currentTotalPrice }) {
 }
 
 Modal.propTypes = {
-  handleModal: PropTypes.func.isRequired,
-  currentTotalPrice: PropTypes.number.isRequired
+  handleModal: PropTypes.func.isRequired
 }
 
 export default Modal

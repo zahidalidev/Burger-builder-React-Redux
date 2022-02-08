@@ -19,16 +19,14 @@ const MyAppbar = () => {
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
-  const [currentUser, setCurrentUser] = useState(false)
-
   const isLogin = currentMenu === '/login'
   const isOrders = currentMenu === '/orders'
   const isHome = currentMenu === '/'
+  const activeMenu = drawerClass => (drawerClass ? 'active-menu-drawer' : 'active-menu')
 
   useEffect(() => {
-    setCurrentUser(user)
     setCurrentMenu(pathname)
-  }, [user, pathname])
+  }, [pathname])
 
   const toggleDrawer = open => () => {
     setState({ ...state, left: open })
@@ -36,7 +34,6 @@ const MyAppbar = () => {
 
   const handleLogout = () => {
     dispatch(USER_LOGOUT())
-    setCurrentUser(false)
     navigate('/')
   }
 
@@ -45,37 +42,57 @@ const MyAppbar = () => {
     navigate(menu)
   }
 
-  const list = () => (
+  const loginMenu = (navClass, drawerClass) => (
+    <>
+      <li
+        className={`${navClass} d-flex align-items-center ${
+          isOrders ? activeMenu(drawerClass) : null
+        }`}
+      >
+        <a onClick={() => handleNavigation('/orders')} className='nav-link'>
+          Orders
+        </a>
+      </li>
+      <li className={`${navClass} d-flex align-items-center`}>
+        <a onClick={handleLogout} className='nav-link'>
+          Logout
+        </a>
+      </li>
+    </>
+  )
+
+  const logoutMenu = (navClass, drawerClass) => (
+    <li
+      className={`${navClass} d-flex align-items-center ${
+        isLogin ? activeMenu(drawerClass) : null
+      }`}
+    >
+      <a onClick={() => handleNavigation('/login')} className='nav-link'>
+        Login
+      </a>
+    </li>
+  )
+
+  const menuList = (navClass, drawerClass) => (
+    <>
+      <li
+        className={`${navClass} d-flex align-items-center ${
+          isHome ? activeMenu(drawerClass) : null
+        }`}
+      >
+        <a onClick={() => handleNavigation('/')} className='nav-link'>
+          Burger Builder
+        </a>
+      </li>
+      {!_.isEmpty(user) ? loginMenu(navClass, drawerClass) : logoutMenu(navClass, drawerClass)}
+    </>
+  )
+
+  const drawerList = () => (
     <div className='drawer-fullList' onClick={toggleDrawer(false)}>
       <img className='drawer-logo' onClick={() => handleNavigation('/')} src={logo} />
       <List>
-        <ul className='navbar-nav drawer-list'>
-          <li className={`d-flex align-items-center ${isHome ? 'active-menu-drawer' : null}`}>
-            <a onClick={() => handleNavigation('/')} className='nav-link'>
-              Burger Builder
-            </a>
-          </li>
-          {currentUser ? (
-            <>
-              <li className={`d-flex align-items-center ${isOrders ? 'active-menu-drawer' : null}`}>
-                <a onClick={() => handleNavigation('/orders')} className='nav-link'>
-                  Orders
-                </a>
-              </li>
-              <li className={`d-flex align-items-center`}>
-                <a onClick={handleLogout} className='nav-link'>
-                  Logout
-                </a>
-              </li>
-            </>
-          ) : (
-            <li className={`d-flex align-items-center ${isLogin ? 'active-menu-drawer' : null}`}>
-              <a onClick={() => handleNavigation('/login')} className='nav-link'>
-                Login
-              </a>
-            </li>
-          )}
-        </ul>
+        <ul className='navbar-nav drawer-list'>{menuList(null, true)}</ul>
       </List>
     </div>
   )
@@ -83,11 +100,10 @@ const MyAppbar = () => {
   return (
     <header className='header text-white'>
       <Drawer open={state['left']} onClose={toggleDrawer(false)}>
-        {list()}
+        {drawerList()}
       </Drawer>
 
       <nav className='navbar navbar-expand-lg py-3 py-lg-0'>
-        {/* Toggler icon */}
         <button
           type='button'
           className='navbar-toggler'
@@ -100,41 +116,8 @@ const MyAppbar = () => {
 
         <img className='logo' onClick={() => handleNavigation('/')} src={logo} />
 
-        {/* collabseable */}
         <div className='collapse navbar-collapse justify-content-between px-3' id='navbarCollapse'>
-          <ul className='navbar-nav nav-list ml-auto py-0'>
-            <li className={`nav-item d-flex align-items-center ${isHome ? 'active-menu' : null}`}>
-              <a onClick={() => handleNavigation('/')} className='nav-link'>
-                Burger Builder
-              </a>
-            </li>
-            {!_.isEmpty(currentUser) ? (
-              <>
-                <li
-                  className={`nav-item d-flex align-items-center ${
-                    isOrders ? 'active-menu' : null
-                  }`}
-                >
-                  <a onClick={() => handleNavigation('/orders')} className='nav-link'>
-                    Orders
-                  </a>
-                </li>
-                <li className={`nav-item d-flex align-items-center`}>
-                  <a onClick={handleLogout} className='nav-link'>
-                    Logout
-                  </a>
-                </li>
-              </>
-            ) : (
-              <li
-                className={`nav-item d-flex align-items-center ${isLogin ? 'active-menu' : null}`}
-              >
-                <a onClick={() => handleNavigation('/login')} className='nav-link'>
-                  Login
-                </a>
-              </li>
-            )}
-          </ul>
+          <ul className='navbar-nav nav-list ml-auto py-0'>{menuList('nav-item', false)}</ul>
         </div>
       </nav>
     </header>

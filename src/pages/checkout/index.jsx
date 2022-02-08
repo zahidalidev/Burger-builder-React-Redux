@@ -1,14 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
 
 import Burger from 'components/burger'
 import ContactForm from 'components/contactform'
 
-import IngredientContext from 'context/ingredientContext'
-import OrdersContext from 'context/ordersContext'
+import { DEFAULT_INGREDIENT } from 'store/ingredients'
+import { ADD_ORDERS } from 'store/orders'
 
 import burgerTotalPrice from 'utils/burgerTotalPrice'
-import defaultIngredients from 'utils/defaultIngredients'
 
 import 'pages/checkout/styles.css'
 
@@ -16,8 +16,8 @@ function Checkout() {
   const [showForm, setshowForm] = useState(false)
   const [currentTotalPrice, setCurrentTotalPrice] = useState(3)
 
-  const { ingredients, setIngredients } = useContext(IngredientContext)
-  const { orders, setOrders } = useContext(OrdersContext)
+  const dispatch = useDispatch()
+  const ingredients = useSelector(state => state.ingredients)
 
   const navigate = useNavigate()
 
@@ -27,8 +27,7 @@ function Checkout() {
 
   const handleAction = action => {
     if (!action) {
-      console.log('defaultIngredients(ingredients): ', defaultIngredients(ingredients))
-      setIngredients(defaultIngredients(ingredients))
+      dispatch(DEFAULT_INGREDIENT())
       navigate('/')
     } else {
       setshowForm(true)
@@ -36,24 +35,19 @@ function Checkout() {
   }
 
   const handleOrder = () => {
-    let tempOrder = ingredients.map(item => ({
+    let tempIngredients = ingredients.map(item => ({
       name: item.name,
       quantity: item.quantity
     }))
 
-    let orderDetail = {
-      id: tempOrder.length + 1,
-      burger: tempOrder,
-      totalPrice: currentTotalPrice
-    }
-    setOrders([...orders, orderDetail])
+    dispatch(ADD_ORDERS(tempIngredients, currentTotalPrice))
     handleAction(false)
   }
 
   return (
     <div className='CheckoutSummary'>
       <h1>We hope it tastes well!</h1>
-      <Burger ingredients={ingredients} />
+      <Burger />
       <button onClick={() => handleAction(false)} className='Button main-btn Danger'>
         Cancel
       </button>

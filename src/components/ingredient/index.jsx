@@ -1,11 +1,10 @@
-import React, { useContext } from 'react'
-
-import IngredientContext from 'context/ingredientContext'
+import React from 'react'
+import { useSelector } from 'react-redux'
 
 import 'components/ingredient/styles.css'
 
 function Ingredient() {
-  const { ingredients } = useContext(IngredientContext)
+  const ingredients = useSelector(state => state.ingredients)
 
   const ingreExist =
     ingredients[0].quantity > 0 ||

@@ -1,23 +1,32 @@
 import React from 'react'
 import PropTypes from 'prop-types'
+import { useDispatch } from 'react-redux'
+import { ADD_INGREDIENT, REMOVE_INGREDIENT } from 'store/ingredients'
 
-function IngredientButton({ item, index, handleIngredients }) {
+function IngredientButton({ item, index }) {
+  const dispatch = useDispatch()
+
   const isDisable = item => item.quantity === 0
+
+  const addIngredient = index => {
+    dispatch(ADD_INGREDIENT(index))
+  }
+
+  const removeIngredient = index => {
+    dispatch(REMOVE_INGREDIENT(index))
+  }
 
   return (
     <div className='BuildControl'>
       <div className='BuildControl Label'>{item.name}</div>
       <button
-        onClick={() => handleIngredients(index, 'remove')}
+        onClick={() => removeIngredient(index)}
         className={`BuildControl ${isDisable(item) && 'buil-btn-disabled'} less less-active`}
         disabled={isDisable(item)}
       >
         Less
       </button>
-      <button
-        onClick={() => handleIngredients(index, 'add')}
-        className='BuildControl more more-active'
-      >
+      <button onClick={() => addIngredient(index)} className='BuildControl more more-active'>
         More
       </button>
     </div>
@@ -26,8 +35,7 @@ function IngredientButton({ item, index, handleIngredients }) {
 
 IngredientButton.propTypes = {
   item: PropTypes.object.isRequired,
-  index: PropTypes.number.isRequired,
-  handleIngredients: PropTypes.func.isRequired
+  index: PropTypes.number.isRequired
 }
 
 export default IngredientButton

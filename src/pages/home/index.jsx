@@ -1,36 +1,21 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import Burger from 'components/burger'
 import Footer from 'components/footer'
 import Modal from 'components/modal'
-
-import UserContext from 'context/userContext'
-import IngredientContext from 'context/ingredientContext'
-
-import burgerTotalPrice from 'utils/burgerTotalPrice'
+import _ from 'lodash'
 
 function Home() {
   const [modal, setModal] = useState(false)
-  const [currentTotalPrice, setCurrentTotalPrice] = useState(3)
 
-  const { ingredients, setIngredients } = useContext(IngredientContext)
-  const { currentUser } = useContext(UserContext)
+  const user = useSelector(state => state.user)
 
   const navigate = useNavigate()
 
-  useEffect(() => {
-    setCurrentTotalPrice(burgerTotalPrice(ingredients))
-  }, [ingredients])
-
-  const handleIngredients = (i, type) => {
-    const tempIngredients = [...ingredients]
-    type === 'add' ? (tempIngredients[i].quantity += 1) : (tempIngredients[i].quantity -= 1)
-    setIngredients(tempIngredients)
-  }
-
   const handleOrder = () => {
-    if (!currentUser) {
+    if (_.isEmpty(user)) {
       navigate('/login', { state: { from: 'home' } })
       return
     }
@@ -48,12 +33,8 @@ function Home() {
   return (
     <>
       <Burger />
-      <Footer
-        handleOrder={handleOrder}
-        handleIngredients={handleIngredients}
-        currentTotalPrice={currentTotalPrice}
-      />
-      {modal && <Modal handleModal={handleModal} currentTotalPrice={currentTotalPrice} />}
+      <Footer handleOrder={handleOrder} />
+      {modal && <Modal handleModal={handleModal} />}
     </>
   )
 }

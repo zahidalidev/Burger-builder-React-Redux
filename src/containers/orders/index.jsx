@@ -1,9 +1,8 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
 
-import 'pages/orders/styles.css'
+import 'containers/orders/styles.css'
 
-function Orders() {
+const Orders = () => {
   const orders = useSelector(state => state.orders)
 
   return (

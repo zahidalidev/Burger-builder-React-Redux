@@ -1,16 +1,11 @@
-import React from 'react'
 import { useSelector } from 'react-redux'
 
 import 'components/ingredient/styles.css'
 
-function Ingredient() {
+const Ingredient = () => {
   const ingredients = useSelector(state => state.ingredients)
 
-  const ingreExist =
-    ingredients[0].quantity > 0 ||
-    ingredients[1].quantity > 0 ||
-    ingredients[2].quantity > 0 ||
-    ingredients[3].quantity > 0
+  const ingreExist = ingredients.reduce((acc, item) => acc + item.quantity, 0)
 
   return (
     <>

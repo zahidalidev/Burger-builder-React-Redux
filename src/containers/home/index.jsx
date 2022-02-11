@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 
@@ -7,7 +7,7 @@ import Footer from 'components/footer'
 import Modal from 'components/modal'
 import _ from 'lodash'
 
-function Home() {
+const Home = () => {
   const [modal, setModal] = useState(false)
 
   const user = useSelector(state => state.user)

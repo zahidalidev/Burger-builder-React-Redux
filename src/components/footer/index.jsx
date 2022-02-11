@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import _ from 'lodash'
 import { useSelector } from 'react-redux'
@@ -8,7 +8,7 @@ import burgerTotalPrice from 'utils/burgerTotalPrice'
 
 import 'components/footer/styles.css'
 
-function Footer({ handleOrder }) {
+const Footer = ({ handleOrder }) => {
   const [currentTotalPrice, setCurrentTotalPrice] = useState(3)
 
   const user = useSelector(state => state.user)

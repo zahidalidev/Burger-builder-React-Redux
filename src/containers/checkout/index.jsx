@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -10,9 +10,9 @@ import { ADD_ORDERS } from 'store/orders'
 
 import burgerTotalPrice from 'utils/burgerTotalPrice'
 
-import 'pages/checkout/styles.css'
+import 'containers/checkout/styles.css'
 
-function Checkout() {
+const Checkout = () => {
   const [showForm, setshowForm] = useState(false)
   const [currentTotalPrice, setCurrentTotalPrice] = useState(3)
 

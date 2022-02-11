@@ -1,9 +1,8 @@
-import React from 'react'
 import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
 import { ADD_INGREDIENT, REMOVE_INGREDIENT } from 'store/ingredients'
 
-function IngredientButton({ item, index }) {
+const IngredientButton = ({ item, index }) => {
   const dispatch = useDispatch()
 
   const isDisable = item => item.quantity === 0

@@ -1,9 +1,9 @@
 import { Route, Routes } from 'react-router-dom'
 
-import Login from 'pages/auth/login'
-import Checkout from 'pages/checkout'
-import Home from 'pages/home'
-import Orders from 'pages/orders'
+import Login from 'containers/auth/login'
+import Checkout from 'containers/checkout'
+import Home from 'containers/home'
+import Orders from 'containers/orders'
 
 const routeList = [
   { path: '/', component: <Home /> },
@@ -12,9 +12,7 @@ const routeList = [
   { path: '/orders', component: <Orders /> }
 ]
 
-import React from 'react'
-
-function AppRoutes() {
+const AppRoutes = () => {
   return (
     <Routes>
       {routeList.map(item => (

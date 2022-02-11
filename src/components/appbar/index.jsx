@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import Drawer from '@material-ui/core/Drawer'
 import List from '@material-ui/core/List'
@@ -10,13 +10,13 @@ import { USER_LOGOUT } from 'store/user'
 import 'components/appbar/styles.css'
 import logo from 'assets/burger-logo.b8503d26.png'
 
-const MyAppbar = () => {
-  const [state, setState] = useState({ left: false })
+const Appbar = () => {
+  const [toggle, setToggle] = useState({ left: false })
   const [currentMenu, setCurrentMenu] = useState('/')
 
   const user = useSelector(state => state.user)
-
   const dispatch = useDispatch()
+
   const navigate = useNavigate()
   const { pathname } = useLocation()
 
@@ -30,7 +30,7 @@ const MyAppbar = () => {
   }, [pathname])
 
   const toggleDrawer = open => () => {
-    setState({ ...state, left: open })
+    setToggle({ ...toggle, left: open })
   }
 
   const handleLogout = () => {
@@ -100,7 +100,7 @@ const MyAppbar = () => {
 
   return (
     <header className='header text-white'>
-      <Drawer open={state['left']} onClose={toggleDrawer(false)}>
+      <Drawer open={toggle['left']} onClose={toggleDrawer(false)}>
         {drawerList()}
       </Drawer>
 
@@ -125,4 +125,4 @@ const MyAppbar = () => {
   )
 }
 
-export default MyAppbar
+export default Appbar

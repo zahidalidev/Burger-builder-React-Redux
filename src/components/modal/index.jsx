@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 
 import burgerTotalPrice from 'utils/burgerTotalPrice'
 
 import 'components/modal/styles.css'
-import { useSelector } from 'react-redux'
 
 function Modal({ handleModal }) {
   const [currentTotalPrice, setCurrentTotalPrice] = useState(3)

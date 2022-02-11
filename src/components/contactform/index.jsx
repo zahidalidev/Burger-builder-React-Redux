@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import PropsTypes from 'prop-types'
 import validator from 'validator'
 
@@ -7,7 +7,7 @@ import Input from 'components/input'
 import 'components/contactform/styles.css'
 import 'pages/auth/login/styles.css'
 
-function ContactForm({ handleOrder }) {
+const ContactForm = ({ handleOrder }) => {
   const [deliveryOption, setDeliveryOption] = useState('fastest')
   const [disableOrderBtn, setDisableOrderBtn] = useState(true)
 
@@ -60,23 +60,26 @@ function ContactForm({ handleOrder }) {
 
   const handleOrderButton = () => {
     const tempFormData = [...formData]
-    let tempDisble
-    for (let i = 0; i < tempFormData.length; i++) {
-      if (i === 2) {
-        tempDisble = tempFormData[i].value.length != 5
-        if (tempDisble) {
+    let isBreak = false
+    tempFormData.forEach((item, index) => {
+      if (index === 2) {
+        if (item.value.length != 5) {
           setDisableOrderBtn(true)
+          isBreak = true
           return
         }
       } else {
-        tempDisble = tempFormData[i].value.length === 0
-        if (tempDisble) {
+        if (item.value.length === 0) {
           setDisableOrderBtn(true)
+          isBreak = true
           return
         }
       }
+    })
+
+    if (!isBreak) {
+      setDisableOrderBtn(false)
     }
-    setDisableOrderBtn(false)
   }
 
   const handleValidateOrder = e => {

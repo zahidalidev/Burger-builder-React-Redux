@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import validator from 'validator'
 import { useDispatch } from 'react-redux'
@@ -7,9 +7,9 @@ import Input from 'components/input'
 
 import { USER_LOGIN } from 'store/user'
 
-import 'pages/auth/login/styles.css'
+import 'containers/auth/login/styles.css'
 
-function Login() {
+const Login = () => {
   const [formData, setFormData] = useState([
     {
       id: 0,

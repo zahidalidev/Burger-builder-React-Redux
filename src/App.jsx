@@ -1,12 +1,12 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
-import MyAppbar from 'components/appbar'
+import Appbar from 'components/appbar'
 import AppRoutes from 'components/AppRoutes'
 
 import { USER_LOGIN } from 'store/user'
 
-function App() {
+const App = () => {
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -19,7 +19,7 @@ function App() {
 
   return (
     <div>
-      <MyAppbar />
+      <Appbar />
       <main className='main-body'>
         <AppRoutes />
       </main>

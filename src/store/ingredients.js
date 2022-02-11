@@ -35,7 +35,6 @@ const slice = createSlice({
       return current(ingredients).map((item, index) =>
         index === action.payload.id ? { ...item, quantity: item.quantity + 1 } : item
       )
-      // ingredients[index].quantity++
     },
     REMOVE_INGREDIENT: (ingredients, action) => {
       return current(ingredients).map((item, index) =>

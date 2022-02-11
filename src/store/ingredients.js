@@ -31,17 +31,18 @@ const slice = createSlice({
   name: 'ingredients',
   initialState: initialState,
   reducers: {
-    ADD_INGREDIENT: (state, action) => {
-      return current(state).map((item, index) =>
+    ADD_INGREDIENT: (ingredients, action) => {
+      return current(ingredients).map((item, index) =>
         index === action.payload.id ? { ...item, quantity: item.quantity + 1 } : item
       )
+      // ingredients[index].quantity++
     },
-    REMOVE_INGREDIENT: (state, action) => {
-      return current(state).map((item, index) =>
+    REMOVE_INGREDIENT: (ingredients, action) => {
+      return current(ingredients).map((item, index) =>
         index === action.payload.id ? { ...item, quantity: item.quantity - 1 } : item
       )
     },
-    DEFAULT_INGREDIENT: state => current(state).map(item => ({ ...item, quantity: 0 }))
+    DEFAULT_INGREDIENT: ingredients => current(ingredients).map(item => ({ ...item, quantity: 0 }))
   }
 })
 

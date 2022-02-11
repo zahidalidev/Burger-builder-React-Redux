@@ -1,16 +1,12 @@
 import { useEffect } from 'react'
-import { Route, Routes } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
+
+import MyAppbar from 'components/appbar'
+import AppRoutes from 'components/AppRoutes'
 
 import { USER_LOGIN } from 'store/user'
 
-import Home from 'pages/home'
-import MyAppbar from 'components/appbar'
-import Orders from 'pages/orders'
-import Login from 'pages/auth/login'
-import Checkout from 'pages/checkout'
-
-function App(props) {
+function App() {
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -25,12 +21,7 @@ function App(props) {
     <div>
       <MyAppbar />
       <main className='main-body'>
-        <Routes>
-          <Route path='/' exact element={<Home {...props} />} />
-          <Route path='/login' exact element={<Login {...props} />} />
-          <Route path='/checkout' exact element={<Checkout {...props} />} />
-          <Route path='/orders' exact element={<Orders {...props} />} />
-        </Routes>
+        <AppRoutes />
       </main>
     </div>
   )

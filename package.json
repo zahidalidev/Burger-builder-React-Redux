@@ -54,5 +54,5 @@
     "eslint-plugin-react": "^7.28.0",
     "prettier": "^2.5.1"
   },
-  "author": {"name": "Zahid Ali", "email": "m.zahidalidev@gmail.com"}
+  "author": {"name": "Zahid Ali", "email": "m.zahidalidev@gmail.com", "url": "https://github.com/zahidalidev"}
 }

@@ -5,7 +5,7 @@ import validator from 'validator'
 import Input from 'components/input'
 
 import 'components/contactform/styles.css'
-import 'pages/auth/login/styles.css'
+import 'containers/auth/login/styles.css'
 
 const ContactForm = ({ handleOrder }) => {
   const [deliveryOption, setDeliveryOption] = useState('fastest')

@@ -1,18 +1,17 @@
-import { createSlice, current } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 let lastId = 0
 const slice = createSlice({
   name: 'orders',
   initialState: [],
   reducers: {
-    ADD_ORDERS: (state, action) => [
-      ...current(state),
-      {
+    ADD_ORDERS: (orders, action) => {
+      orders.push({
         id: ++lastId,
         ingredients: action.payload.ingredients,
         totalPrice: action.payload.totalPrice
-      }
-    ]
+      })
+    }
   }
 })
 

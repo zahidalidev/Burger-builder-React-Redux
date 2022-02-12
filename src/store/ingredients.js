@@ -1,4 +1,4 @@
-import { createSlice, current } from '@reduxjs/toolkit'
+import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = [
   {
@@ -32,16 +32,12 @@ const slice = createSlice({
   initialState: initialState,
   reducers: {
     ADD_INGREDIENT: (ingredients, action) => {
-      return current(ingredients).map((item, index) =>
-        index === action.payload.id ? { ...item, quantity: item.quantity + 1 } : item
-      )
+      ingredients[action.payload.id].quantity++
     },
     REMOVE_INGREDIENT: (ingredients, action) => {
-      return current(ingredients).map((item, index) =>
-        index === action.payload.id ? { ...item, quantity: item.quantity - 1 } : item
-      )
+      ingredients[action.payload.id].quantity--
     },
-    DEFAULT_INGREDIENT: ingredients => current(ingredients).map(item => ({ ...item, quantity: 0 }))
+    DEFAULT_INGREDIENT: ingredients => ingredients.map(item => ({ ...item, quantity: 0 }))
   }
 })
 

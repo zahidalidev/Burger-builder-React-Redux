@@ -4,7 +4,7 @@ import validator from 'validator'
 
 import Input from 'components/input'
 
-import { Heading4, InputWrapper, SelectWrapper, SuccessButton } from 'sharedStyledComponents'
+import { Heading4, InputWrapper, SelectWrapper, SuccessButton } from 'sharedStyle'
 import { ContactWrapper } from 'components/contactform/style'
 
 const ContactForm = ({ handleOrder }) => {

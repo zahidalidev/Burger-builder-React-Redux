@@ -1,7 +1,7 @@
 import PropsTypes from 'prop-types'
 
 import { Typography } from 'components/input/styles'
-import { InputWrapper, InputField } from 'sharedStyledComponents'
+import { InputWrapper, InputField } from 'sharedStyle'
 
 const Input = ({ item, handleChange, index }) => {
   return (

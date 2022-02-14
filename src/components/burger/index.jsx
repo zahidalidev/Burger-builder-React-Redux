@@ -7,8 +7,8 @@ import { colors } from 'config/theme'
 const Burger = () => (
   <BurgerWrapper>
     <BreadTop>
-      <Seeds1 white={colors.white} grey={colors.grey}></Seeds1>
-      <Seeds2 white={colors.white} grey={colors.grey}></Seeds2>
+      <Seeds1></Seeds1>
+      <Seeds2></Seeds2>
     </BreadTop>
     <Ingredient />
     <BreadBottom></BreadBottom>

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { colors } from 'config/theme'
 
 export const BurgerWrapper = styled.div`
   width: 43.75rem;
@@ -36,24 +37,24 @@ export const Seeds1 = styled.div`
   width: 10%;
   height: 15%;
   position: absolute;
-  background-color: ${props => props.white};
+  background-color: ${colors.white};
   left: 30%;
   top: 50%;
   border-radius: 40%;
   transform: rotate(-20deg);
-  box-shadow: inset -2px -3px ${props => props.grey};
+  box-shadow: inset -2px -3px ${colors.grey};
 
   &:after {
     content: '';
     width: 100%;
     height: 100%;
     position: absolute;
-    background-color: ${props => props.white};
+    background-color: ${colors.white};
     left: -170%;
     top: -260%;
     border-radius: 40%;
     transform: rotate(60deg);
-    box-shadow: inset -1px 2px ${props => props.grey};
+    box-shadow: inset -1px 2px ${colors.grey};
   }
 
   &:before {
@@ -66,7 +67,7 @@ export const Seeds1 = styled.div`
     top: -50%;
     border-radius: 40%;
     transform: rotate(60deg);
-    box-shadow: inset -1px -3px ${props => props.grey};
+    box-shadow: inset -1px -3px ${colors.grey};
   }
 `
 
@@ -74,23 +75,23 @@ export const Seeds2 = styled.div`
   width: 10%;
   height: 15%;
   position: absolute;
-  background-color: ${props => props.white};
+  background-color: ${colors.white};
   left: 64%;
   top: 50%;
   border-radius: 40%;
   transform: rotate(10deg);
-  box-shadow: inset -3px 0 ${props => props.grey};
+  box-shadow: inset -3px 0 ${colors.grey};
 
   &:before {
     content: '';
     width: 100%;
     height: 100%;
     position: absolute;
-    background-color: ${props => props.white};
+    background-color: ${colors.white};
     left: 150%;
     top: -130%;
     border-radius: 40%;
     transform: rotate(90deg);
-    box-shadow: inset 1px 3px ${props => props.grey};
+    box-shadow: inset 1px 3px ${colors.grey};
   }
 `

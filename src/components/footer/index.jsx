@@ -4,9 +4,8 @@ import _ from 'lodash'
 import { useSelector } from 'react-redux'
 
 import IngredientButton from 'components/ingredientButton'
+import { FooterWrapper, OrderButton } from 'components/footer/styles'
 import burgerTotalPrice from 'utils/burgerTotalPrice'
-
-import 'components/footer/styles.css'
 
 const Footer = ({ handleOrder }) => {
   const [currentTotalPrice, setCurrentTotalPrice] = useState(3)
@@ -22,7 +21,7 @@ const Footer = ({ handleOrder }) => {
   }, [ingredients])
 
   return (
-    <div className='BuildControls'>
+    <FooterWrapper>
       <p>
         Current price: <strong>{`$${currentTotalPrice}`}</strong>
       </p>
@@ -31,16 +30,10 @@ const Footer = ({ handleOrder }) => {
         <IngredientButton key={item.id.toString()} index={index} item={item} />
       ))}
 
-      <button
-        className={`BuildControls OrderButton text-uppercase ${
-          isOrderActive ? 'OrderButton-active' : 'OrderButton-disabled'
-        }`}
-        disabled={currentTotalPrice == 3}
-        onClick={handleOrder}
-      >
+      <OrderButton disabled={!isOrderActive} onClick={handleOrder}>
         {orderBtnLable}
-      </button>
-    </div>
+      </OrderButton>
+    </FooterWrapper>
   )
 }
 

@@ -4,9 +4,8 @@ import validator from 'validator'
 
 import Input from 'components/input'
 
+import { Heading4, InputWrapper, SelectWrapper, SuccessButton } from 'sharedStyledComponents'
 import { ContactWrapper } from 'components/contactform/style'
-import 'components/contactform/styles.css'
-import 'containers/auth/login/styles.css'
 
 const ContactForm = ({ handleOrder }) => {
   const [deliveryOption, setDeliveryOption] = useState('fastest')
@@ -99,30 +98,25 @@ const ContactForm = ({ handleOrder }) => {
 
   return (
     <ContactWrapper>
-      <h4>Enter your Contact Data</h4>
+      <Heading4>Enter your Contact Data</Heading4>
       <form>
         {formData.map((item, index) => (
           <Input key={item.placeHolder} index={index} item={item} handleChange={handleChange} />
         ))}
 
-        <div className='Input input-container'>
-          <select
+        <InputWrapper>
+          <SelectWrapper
             value={deliveryOption}
             onChange={value => setDeliveryOption(value.target.value)}
-            className='Input InputElement'
           >
             <option value='fastest'>Fastest</option>
             <option value='cheapest'>Cheapest</option>
-          </select>
-        </div>
+          </SelectWrapper>
+        </InputWrapper>
 
-        <button
-          disabled={disableOrderBtn}
-          onClick={handleValidateOrder}
-          className={`Button Success ${disableOrderBtn && 'form-btn-disable'}`}
-        >
+        <SuccessButton disabled={disableOrderBtn} onClick={handleValidateOrder}>
           ORDER
-        </button>
+        </SuccessButton>
       </form>
     </ContactWrapper>
   )

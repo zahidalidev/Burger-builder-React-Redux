@@ -1,6 +1,6 @@
 import Ingredient from 'components/ingredient'
 
-import { BreadBottom, BreadTop, BurgerWrapper, Seeds1, Seeds2 } from 'components/burger/style'
+import { BreadBottom, BreadTop, BurgerWrapper, Seeds1, Seeds2 } from 'components/burger/styles'
 
 import { colors } from 'config/theme'
 

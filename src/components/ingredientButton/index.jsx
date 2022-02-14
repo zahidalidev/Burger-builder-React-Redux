@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import { useDispatch } from 'react-redux'
 import { ADD_INGREDIENT, REMOVE_INGREDIENT } from 'store/ingredients'
+import { ButtonWrapper, Label, LessButton, MoreButton } from 'components/ingredientButton/styles'
 
 const IngredientButton = ({ item, index }) => {
   const dispatch = useDispatch()
@@ -16,19 +17,13 @@ const IngredientButton = ({ item, index }) => {
   }
 
   return (
-    <div className='BuildControl'>
-      <div className='BuildControl Label'>{item.name}</div>
-      <button
-        onClick={() => removeIngredient(index)}
-        className={`BuildControl ${isDisable(item) && 'buil-btn-disabled'} less less-active`}
-        disabled={isDisable(item)}
-      >
+    <ButtonWrapper>
+      <Label className='BuildControl Label'>{item.name}</Label>
+      <LessButton onClick={() => removeIngredient(index)} disabled={isDisable(item)}>
         Less
-      </button>
-      <button onClick={() => addIngredient(index)} className='BuildControl more more-active'>
-        More
-      </button>
-    </div>
+      </LessButton>
+      <MoreButton onClick={() => addIngredient(index)}>More</MoreButton>
+    </ButtonWrapper>
   )
 }
 

@@ -8,7 +8,7 @@
   box-sizing: border-box;
 }
 
-.Button {
+/* .Button {
   background-color: transparent;
   border: none;
   color: white;
@@ -24,7 +24,7 @@
 
 .Danger {
   color: #944317;
-}
+} */
 
 @media (min-width: 600px) {
   .Auth {

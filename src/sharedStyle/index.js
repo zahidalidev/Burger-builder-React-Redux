@@ -80,3 +80,6 @@ export const Heading4 = styled.h4`
   margin-inline-end: 0px !important;
   font-weight: bold !important;
 `
+export const Main = styled.main`
+  margin-top: 7rem;
+`

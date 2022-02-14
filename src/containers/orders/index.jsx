@@ -1,27 +1,26 @@
 import { useSelector } from 'react-redux'
 
-import 'containers/orders/styles.css'
+import { OrderContent, OrderWrapper } from 'containers/orders/styles'
 
 const Orders = () => {
   const orders = useSelector(state => state.orders)
 
   return (
     <div>
-      {orders.map((item, i) => (
-        <div key={i.toString()} className='Order'>
+      {orders.map((item, index) => (
+        <OrderWrapper key={index.toString()}>
           <p>
             Ingredients:
             {item.ingredients.map(ingredient => (
-              <span
+              <OrderContent
                 key={ingredient.name}
-                className='c-order'
-              >{`${ingredient.name} (${ingredient.quantity})`}</span>
+              >{`${ingredient.name} (${ingredient.quantity})`}</OrderContent>
             ))}
           </p>
           <p>
             Price <strong>USD ({item.totalPrice})</strong>
           </p>
-        </div>
+        </OrderWrapper>
       ))}
     </div>
   )

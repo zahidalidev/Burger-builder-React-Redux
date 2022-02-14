@@ -8,7 +8,6 @@ import reportWebVitals from './reportWebVitals'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'font-awesome/css/font-awesome.css'
 import 'mdbreact/dist/css/mdb.css'
-import './App.css'
 import App from './App'
 
 const store = configureStore()

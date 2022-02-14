@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux'
 
 import Appbar from 'components/appbar'
 import AppRoutes from 'components/AppRoutes'
+import { Main } from 'sharedStyle'
 
 import { USER_LOGIN } from 'store/user'
 
@@ -20,9 +21,9 @@ const App = () => {
   return (
     <div>
       <Appbar />
-      <main className='main-body'>
+      <Main>
         <AppRoutes />
-      </main>
+      </Main>
     </div>
   )
 }

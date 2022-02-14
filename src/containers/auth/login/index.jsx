@@ -7,7 +7,6 @@ import Input from 'components/input'
 
 import { USER_LOGIN } from 'store/user'
 
-import 'containers/auth/login/styles.css'
 import { LoginWrapper } from 'containers/auth/login/styles'
 import { DangerButton, SuccessButton } from 'sharedStyle'
 

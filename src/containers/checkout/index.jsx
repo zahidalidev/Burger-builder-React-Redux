@@ -10,7 +10,8 @@ import { ADD_ORDERS } from 'store/orders'
 
 import burgerTotalPrice from 'utils/burgerTotalPrice'
 
-import 'containers/checkout/styles.css'
+import { CheckoutWrapper, MainButton } from 'containers/checkout/styles'
+import { Heading1, SuccessButton } from 'sharedStyle'
 
 const Checkout = () => {
   const [showForm, setshowForm] = useState(false)
@@ -45,17 +46,13 @@ const Checkout = () => {
   }
 
   return (
-    <div className='CheckoutSummary'>
-      <h1>We hope it tastes well!</h1>
+    <CheckoutWrapper>
+      <Heading1>We hope it tastes well!</Heading1>
       <Burger />
-      <button onClick={() => handleAction(false)} className='Button main-btn Danger'>
-        Cancel
-      </button>
-      <button onClick={() => handleAction(true)} className='Button Success'>
-        Continue
-      </button>
+      <MainButton onClick={() => handleAction(false)}>Cancel</MainButton>
+      <SuccessButton onClick={() => handleAction(true)}>Continue</SuccessButton>
       {showForm && <ContactForm handleOrder={handleOrder} />}
-    </div>
+    </CheckoutWrapper>
   )
 }
 

@@ -1,19 +1,20 @@
 import PropsTypes from 'prop-types'
 
-import 'components/input/styles.css'
+import { Typography } from 'components/input/styles'
+import { InputWrapper, InputField } from 'sharedStyledComponents'
 
 const Input = ({ item, handleChange, index }) => {
   return (
-    <div className='Input input-container'>
-      <input
+    <InputWrapper>
+      <InputField
+        invalid={item.error}
         type={item.type}
-        className={`Input InputElement ${item.error && 'Invalid'}`}
         placeholder={item.placeHolder}
         value={item.value}
         onChange={e => handleChange(index, e.target.value)}
       />
-      {item.error ? <p className='Input ValidationError'>Please enter a valid </p> : null}
-    </div>
+      {item.error ? <Typography>Please enter a valid </Typography> : null}
+    </InputWrapper>
   )
 }
 

@@ -4,6 +4,7 @@ import validator from 'validator'
 
 import Input from 'components/input'
 
+import { ContactWrapper } from 'components/contactform/style'
 import 'components/contactform/styles.css'
 import 'containers/auth/login/styles.css'
 
@@ -97,7 +98,7 @@ const ContactForm = ({ handleOrder }) => {
   }
 
   return (
-    <div className='ContactData'>
+    <ContactWrapper>
       <h4>Enter your Contact Data</h4>
       <form>
         {formData.map((item, index) => (
@@ -123,7 +124,7 @@ const ContactForm = ({ handleOrder }) => {
           ORDER
         </button>
       </form>
-    </div>
+    </ContactWrapper>
   )
 }
 

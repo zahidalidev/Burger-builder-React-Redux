@@ -1,4 +1,6 @@
-/* .ContactData {
+import styled from 'styled-components'
+
+export const ContactWrapper = styled.div`
   margin: 20px auto;
   width: 80%;
   text-align: center;
@@ -6,15 +8,8 @@
   border: 1px solid #eee;
   padding: 10px;
   box-sizing: border-box;
-} */
 
-.form-btn-disable {
-  color: #ccc !important;
-  cursor: not-allowed !important;
-}
-/* 
-@media (min-width: 600px) {
-  .ContactData {
+  @media (min-width: 600px) {
     width: 500px;
   }
-} */
+`

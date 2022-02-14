@@ -1,4 +1,6 @@
-.backdrop {
+import styled from 'styled-components'
+
+export const Backdrop = styled.div`
   width: 100%;
   height: 100%;
   position: fixed;
@@ -6,8 +8,8 @@
   left: 0;
   top: 0;
   background-color: rgba(0, 0, 0, 0.5);
-}
-.Modal {
+`
+export const ModalWrapper = styled.div`
   position: fixed;
   z-index: 500;
   background-color: white;
@@ -19,11 +21,11 @@
   top: 30%;
   box-sizing: border-box;
   transition: all 0.3s ease-out;
-}
+  transform: translateY(0px);
+  opacity: 1;
 
-@media (min-width: 600px) {
-  .Modal {
+  @media (min-width: 600px) {
     width: 500px;
     left: calc(50% - 250px);
   }
-}
+`

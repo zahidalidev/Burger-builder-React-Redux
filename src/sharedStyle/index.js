@@ -54,7 +54,7 @@ export const SuccessButton = styled(Button)`
   cursor: ${props => (props.disabled ? 'allowed' : 'not-allowed')};
 `
 export const DangerButton = styled(Button)`
-  color: #5c9210;
+  color: #944317;
 `
 
 export const Heading1 = styled.h1`

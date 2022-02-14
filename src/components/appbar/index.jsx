@@ -1,13 +1,25 @@
 import { useState, useEffect } from 'react'
 import { useNavigate, useLocation } from 'react-router-dom'
 import Drawer from '@material-ui/core/Drawer'
-import List from '@material-ui/core/List'
+import MaterialList from '@material-ui/core/List'
 import _ from 'lodash'
 
 import { useSelector, useDispatch } from 'react-redux'
 import { USER_LOGOUT } from 'store/user'
+import {
+  Bars,
+  CollapseNav,
+  DrawerList,
+  DrawerWrapper,
+  Header,
+  Image,
+  Link,
+  List,
+  Logo,
+  Nav,
+  NavList
+} from 'components/appbar/style'
 
-import 'components/appbar/styles.css'
 import logo from 'assets/burger-logo.b8503d26.png'
 
 const Appbar = () => {
@@ -44,66 +56,46 @@ const Appbar = () => {
 
   const loginMenu = (navClass, drawerClass) => (
     <>
-      <li
-        className={`${navClass} d-flex align-items-center ${
-          isOrders ? activeMenu(drawerClass) : null
-        }`}
-      >
-        <a onClick={() => handleNavigation('/orders')} className='nav-link'>
-          Orders
-        </a>
-      </li>
-      <li className={`${navClass} d-flex align-items-center`}>
-        <a onClick={handleLogout} className='nav-link'>
-          Logout
-        </a>
-      </li>
+      <List navClass={navClass} isActive={`${isOrders ? activeMenu(drawerClass) : false}`}>
+        <Link onClick={() => handleNavigation('/orders')}>Orders</Link>
+      </List>
+      <List navClass={navClass}>
+        <Link onClick={handleLogout}>Logout</Link>
+      </List>
     </>
   )
 
   const logoutMenu = (navClass, drawerClass) => (
-    <li
-      className={`${navClass} d-flex align-items-center ${
-        isLogin ? activeMenu(drawerClass) : null
-      }`}
-    >
-      <a onClick={() => handleNavigation('/login')} className='nav-link'>
-        Login
-      </a>
-    </li>
+    <List navClass={navClass} isActive={`${isLogin ? activeMenu(drawerClass) : false}`}>
+      <Link onClick={() => handleNavigation('/login')}>Login</Link>
+    </List>
   )
 
   const menuList = (navClass, drawerClass) => (
     <>
-      <li
-        className={`${navClass} d-flex align-items-center ${
-          isHome ? activeMenu(drawerClass) : null
-        }`}
-      >
-        <a onClick={() => handleNavigation('/')} className='nav-link'>
-          Burger Builder
-        </a>
-      </li>
+      <List navClass={navClass} isActive={`${isHome ? activeMenu(drawerClass) : false}`}>
+        <Link onClick={() => handleNavigation('/')}>Burger Builder</Link>
+      </List>
       {!_.isEmpty(user) ? loginMenu(navClass, drawerClass) : logoutMenu(navClass, drawerClass)}
     </>
   )
 
   const drawerList = () => (
-    <div className='drawer-fullList' onClick={toggleDrawer(false)}>
-      <img className='drawer-logo' onClick={() => handleNavigation('/')} src={logo} />
-      <List>
-        <ul className='navbar-nav drawer-list'>{menuList(null, true)}</ul>
-      </List>
-    </div>
+    <DrawerWrapper onClick={toggleDrawer(false)}>
+      <Image onClick={() => handleNavigation('/')} src={logo} />
+      <MaterialList>
+        <DrawerList>{menuList(false, true)}</DrawerList>
+      </MaterialList>
+    </DrawerWrapper>
   )
 
   return (
-    <header className='header text-white'>
+    <Header>
       <Drawer open={toggle['left']} onClose={toggleDrawer(false)}>
         {drawerList()}
       </Drawer>
 
-      <nav className='navbar navbar-expand-lg py-3 py-lg-0'>
+      <Nav className='navbar-expand-lg py-3 py-lg-0'>
         <button
           type='button'
           className='navbar-toggler'
@@ -111,16 +103,16 @@ const Appbar = () => {
           data-target='#navbarCollapse'
           onClick={toggleDrawer(true)}
         >
-          <a onClick={toggleDrawer(true)} className='fa fa-bars'></a>
+          <Bars onClick={toggleDrawer(true)} className='fa fa-bars'></Bars>
         </button>
 
-        <img className='logo' onClick={() => handleNavigation('/')} src={logo} />
+        <Logo onClick={() => handleNavigation('/')} src={logo} />
 
-        <div className='collapse navbar-collapse justify-content-between px-3' id='navbarCollapse'>
-          <ul className='navbar-nav nav-list ml-auto py-0'>{menuList('nav-item', false)}</ul>
-        </div>
-      </nav>
-    </header>
+        <CollapseNav className='collapse navbar-collapse'>
+          <NavList>{menuList(true, false)}</NavList>
+        </CollapseNav>
+      </Nav>
+    </Header>
   )
 }
 

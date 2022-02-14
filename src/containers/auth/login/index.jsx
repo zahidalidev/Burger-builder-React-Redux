@@ -8,6 +8,8 @@ import Input from 'components/input'
 import { USER_LOGIN } from 'store/user'
 
 import 'containers/auth/login/styles.css'
+import { LoginWrapper } from 'containers/auth/login/styles'
+import { DangerButton, SuccessButton } from 'sharedStyle'
 
 const Login = () => {
   const [formData, setFormData] = useState([
@@ -76,32 +78,22 @@ const Login = () => {
     handleChange(1, formData[1].value)
   }
 
-  const signinBtn = (
-    <button onClick={() => setSubmitType('REGISTER')} className='Button Danger'>
-      SIGNIN
-    </button>
-  )
+  const signinBtn = <DangerButton onClick={() => setSubmitType('REGISTER')}>SIGNIN</DangerButton>
 
-  const registerBtn = (
-    <button onClick={() => setSubmitType('SIGNIN')} className='Button Danger'>
-      REGISTER
-    </button>
-  )
+  const registerBtn = <DangerButton onClick={() => setSubmitType('SIGNIN')}>REGISTER</DangerButton>
 
   return (
-    <main className='Layout Content'>
-      <div className='Auth'>
+    <main>
+      <LoginWrapper>
         <form>
           {formData.map((item, index) => (
             <Input key={item.placeHolder} index={index} item={item} handleChange={handleChange} />
           ))}
-          <button onClick={handleLogin} className='Button Success'>
-            SUBMIT
-          </button>
+          <SuccessButton onClick={handleLogin}>SUBMIT</SuccessButton>
         </form>
 
         {submitType === 'SIGNIN' ? signinBtn : registerBtn}
-      </div>
+      </LoginWrapper>
     </main>
   )
 }

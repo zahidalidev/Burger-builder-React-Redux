@@ -1,16 +1,18 @@
 import Ingredient from 'components/ingredient'
 
-import 'components/burger/styles.css'
+import { BreadBottom, BreadTop, BurgerWrapper, Seeds1, Seeds2 } from 'components/burger/style'
+
+import { colors } from 'config/theme'
 
 const Burger = () => (
-  <div className='Burger'>
-    <div className='BreadTop'>
-      <div className='Seeds1'></div>
-      <div className='Seeds2'></div>
-    </div>
+  <BurgerWrapper>
+    <BreadTop>
+      <Seeds1 white={colors.white} grey={colors.grey}></Seeds1>
+      <Seeds2 white={colors.white} grey={colors.grey}></Seeds2>
+    </BreadTop>
     <Ingredient />
-    <div className='BreadBottom'></div>
-  </div>
+    <BreadBottom></BreadBottom>
+  </BurgerWrapper>
 )
 
 export default Burger

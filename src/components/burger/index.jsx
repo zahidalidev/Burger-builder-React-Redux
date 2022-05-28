@@ -1,20 +1,16 @@
-import React from 'react'
-
 import Ingredient from 'components/ingredient'
 
-import 'components/burger/styles.css'
+import { BreadBottom, BreadTop, BurgerWrapper, Seeds1, Seeds2 } from 'components/burger/styles'
 
-function Burger() {
-  return (
-    <div className='Burger'>
-      <div className='BreadTop'>
-        <div className='Seeds1'></div>
-        <div className='Seeds2'></div>
-      </div>
-      <Ingredient />
-      <div className='BreadBottom'></div>
-    </div>
-  )
-}
+const Burger = () => (
+  <BurgerWrapper>
+    <BreadTop>
+      <Seeds1></Seeds1>
+      <Seeds2></Seeds2>
+    </BreadTop>
+    <Ingredient />
+    <BreadBottom></BreadBottom>
+  </BurgerWrapper>
+)
 
 export default Burger

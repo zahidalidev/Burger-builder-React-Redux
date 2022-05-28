@@ -1,18 +1,26 @@
-import React, { useContext } from 'react'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import PropTypes from 'prop-types'
 
-import IngredientContext from 'context/ingredientContext'
+import burgerTotalPrice from 'utils/burgerTotalPrice'
 
-import 'components/modal/styles.css'
+import { Backdrop, ModalWrapper } from 'components/modal/styles'
+import { DangerButton, Heading3, SuccessButton } from 'sharedStyle'
 
-function Modal({ handleModal, currentTotalPrice }) {
-  const { ingredients } = useContext(IngredientContext)
+function Modal({ handleModal }) {
+  const [currentTotalPrice, setCurrentTotalPrice] = useState(3)
+
+  const ingredients = useSelector(state => state.ingredients)
+
+  useEffect(() => {
+    setCurrentTotalPrice(burgerTotalPrice(ingredients))
+  }, [ingredients])
 
   return (
     <>
-      <div className='backdrop'></div>
-      <div className='Modal' style={{ transform: 'translateY(0px)', opacity: 1 }}>
-        <h3>Your Order Summary:</h3>
+      <Backdrop></Backdrop>
+      <ModalWrapper>
+        <Heading3>Your Order Summary:</Heading3>
         <ul>
           {ingredients.map(item => (
             <li key={item.name}>
@@ -21,23 +29,18 @@ function Modal({ handleModal, currentTotalPrice }) {
           ))}
         </ul>
         <p>
-          <strong>Total Price: {`$${currentTotalPrice.toFixed(2)}`}</strong>
+          <strong>Total Price: {`$${currentTotalPrice}`}</strong>
         </p>
         <p>Continue to Checkout?</p>
-        <button onClick={() => handleModal(false)} className='Button Danger'>
-          CANCEL
-        </button>
-        <button onClick={() => handleModal(true)} className='Button Success'>
-          CONTINUE
-        </button>
-      </div>
+        <DangerButton onClick={() => handleModal(false)}>CANCEL</DangerButton>
+        <SuccessButton onClick={() => handleModal(true)}>CONTINUE</SuccessButton>
+      </ModalWrapper>
     </>
   )
 }
 
 Modal.propTypes = {
-  handleModal: PropTypes.func.isRequired,
-  currentTotalPrice: PropTypes.number.isRequired
+  handleModal: PropTypes.func.isRequired
 }
 
 export default Modal

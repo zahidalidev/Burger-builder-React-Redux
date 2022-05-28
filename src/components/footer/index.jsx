@@ -1,58 +1,44 @@
-import React, { useContext } from 'react'
+import { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
+import _ from 'lodash'
+import { useSelector } from 'react-redux'
 
-// context
-import UserContext from 'context/userContext'
-import IngredientContext from 'context/ingredientContext'
+import IngredientButton from 'components/ingredientButton'
+import { FooterWrapper, OrderButton } from 'components/footer/styles'
+import burgerTotalPrice from 'utils/burgerTotalPrice'
 
-import 'components/footer/styles.css'
+const Footer = ({ handleOrder }) => {
+  const [currentTotalPrice, setCurrentTotalPrice] = useState(3)
 
-function Footer({ handleIngredients, handleOrder, currentTotalPrice }) {
-  const { currentUser } = useContext(UserContext)
-  const { ingredients } = useContext(IngredientContext)
+  const user = useSelector(state => state.user)
+  const ingredients = useSelector(state => state.ingredients)
+
+  const isOrderActive = currentTotalPrice > 3
+  const orderBtnLable = _.isEmpty(user) ? 'Sign up to order' : 'Order now'
+
+  useEffect(() => {
+    setCurrentTotalPrice(burgerTotalPrice(ingredients))
+  }, [ingredients])
 
   return (
-    <div className='BuildControls'>
+    <FooterWrapper>
       <p>
-        Current price: <strong>{`$${currentTotalPrice.toFixed(2)}`}</strong>
+        Current price: <strong>{`$${currentTotalPrice}`}</strong>
       </p>
 
-      {ingredients.map((item, i) => (
-        <div key={item.id.toString()} className='BuildControl'>
-          <div className='BuildControl Label'>{item.name}</div>
-          <button
-            onClick={() => handleIngredients(i, 'remove')}
-            className={`BuildControl ${item.lessDisable && 'buil-btn-disabled'} less less-active`}
-            disabled={item.lessDisable}
-          >
-            Less
-          </button>
-          <button
-            onClick={() => handleIngredients(i, 'add')}
-            className='BuildControl more more-active'
-          >
-            More
-          </button>
-        </div>
+      {ingredients.map((item, index) => (
+        <IngredientButton key={item.id.toString()} index={index} item={item} />
       ))}
 
-      <button
-        className={`BuildControls OrderButton text-uppercase ${
-          currentTotalPrice > 3 ? 'OrderButton-active' : 'OrderButton-disabled'
-        }`}
-        disabled={currentTotalPrice == 3}
-        onClick={handleOrder}
-      >
-        {currentUser ? 'Order now' : 'Sign up to order'}
-      </button>
-    </div>
+      <OrderButton disabled={!isOrderActive} onClick={handleOrder}>
+        {orderBtnLable}
+      </OrderButton>
+    </FooterWrapper>
   )
 }
 
 Footer.propTypes = {
-  handleIngredients: PropTypes.func.isRequired,
-  handleOrder: PropTypes.func.isRequired,
-  currentTotalPrice: PropTypes.number.isRequired
+  handleOrder: PropTypes.func.isRequired
 }
 
 export default Footer

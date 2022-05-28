@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import PropsTypes from 'prop-types'
 import validator from 'validator'
 
-// custom components
-import 'components/contactform/styles.css'
-import 'pages/auth/login/styles.css'
+import Input from 'components/input'
 
-function ContactForm({ handleOrder }) {
+import { Heading4, InputWrapper, SelectWrapper, SuccessButton } from 'sharedStyle'
+import { ContactWrapper } from 'components/contactform/style'
+
+const ContactForm = ({ handleOrder }) => {
   const [deliveryOption, setDeliveryOption] = useState('fastest')
   const [disableOrderBtn, setDisableOrderBtn] = useState(true)
 
@@ -51,36 +52,34 @@ function ContactForm({ handleOrder }) {
   const handleChange = (i, value) => {
     const tempData = [...formData]
     tempData[i].value = value
+    tempData[i].error = i === 2 ? tempData[i].value.length != 5 : tempData[i].value.length < 1
 
-    const validLength = i === 2 ? 5 : 1
-    if (i === 2) {
-      tempData[i].error = tempData[i].value.length != validLength
-    } else {
-      tempData[i].error = tempData[i].value.length < validLength
-    }
     setFormData(tempData)
     handleOrderButton()
   }
 
   const handleOrderButton = () => {
     const tempFormData = [...formData]
-    let tempDisble
-    for (let i = 0; i < tempFormData.length; i++) {
-      if (i === 2) {
-        tempDisble = tempFormData[i].value.length != 5
-        if (tempDisble) {
+    let isBreak = false
+    tempFormData.forEach((item, index) => {
+      if (index === 2) {
+        if (item.value.length != 5) {
           setDisableOrderBtn(true)
+          isBreak = true
           return
         }
       } else {
-        tempDisble = tempFormData[i].value.length === 0
-        if (tempDisble) {
+        if (item.value.length === 0) {
           setDisableOrderBtn(true)
+          isBreak = true
           return
         }
       }
+    })
+
+    if (!isBreak) {
+      setDisableOrderBtn(false)
     }
-    setDisableOrderBtn(false)
   }
 
   const handleValidateOrder = e => {
@@ -98,41 +97,28 @@ function ContactForm({ handleOrder }) {
   }
 
   return (
-    <div className='ContactData'>
-      <h4>Enter your Contact Data</h4>
+    <ContactWrapper>
+      <Heading4>Enter your Contact Data</Heading4>
       <form>
-        {formData.map((item, i) => (
-          <div key={item.placeHolder} className='Input input-container'>
-            <input
-              type={item.type}
-              className={`Input InputElement ${item.error && 'Invalid'}`}
-              placeholder={item.placeHolder}
-              value={item.value}
-              onChange={e => handleChange(i, e.target.value)}
-            />
-            {item.error ? <p className='Input ValidationError'>Please enter a valid </p> : null}
-          </div>
+        {formData.map((item, index) => (
+          <Input key={item.placeHolder} index={index} item={item} handleChange={handleChange} />
         ))}
 
-        <div className='Input input-container'>
-          <select
+        <InputWrapper>
+          <SelectWrapper
             value={deliveryOption}
             onChange={value => setDeliveryOption(value.target.value)}
-            className='Input InputElement'
           >
             <option value='fastest'>Fastest</option>
             <option value='cheapest'>Cheapest</option>
-          </select>
-        </div>
-        <button
-          disabled={disableOrderBtn}
-          onClick={handleValidateOrder}
-          className={`Button Success ${disableOrderBtn && 'form-btn-disable'}`}
-        >
+          </SelectWrapper>
+        </InputWrapper>
+
+        <SuccessButton disabled={disableOrderBtn} onClick={handleValidateOrder}>
           ORDER
-        </button>
+        </SuccessButton>
       </form>
-    </div>
+    </ContactWrapper>
   )
 }
 
